@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1656638120144,
@@ -32,6 +32,10 @@
                 {
                     "date": 1656712695801,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,8 @@\n         <div class=\"row center\">\n             <a href=\"index.html\"><h1>Parallax</h1></a>\n         </div>\n         <router-outlet></router-outlet>\n-        <!-- <div class=\"row center gap-small create-session\" id=\"create\">\n-            <div class=\"col center\">\n-                <div class=\"row\">\n-                    <h3>create session</h3>\n-                </div>\n-            </div>\n-        </div> -->\n         <!-- <div class=\"row\">\n             <div class=\"col\">\n             </div>\n         </div> -->\n"
+                },
+                {
+                    "date": 1656715065312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,6 @@\n         <div class=\"row center\">\n             <a href=\"index.html\"><h1>Parallax</h1></a>\n         </div>\n         <router-outlet></router-outlet>\n-        <!-- <div class=\"row\">\n-            <div class=\"col\">\n-            </div>\n-        </div> -->\n     </div>\n </div>\n"
                 }
             ],
             "date": 1656638120144,

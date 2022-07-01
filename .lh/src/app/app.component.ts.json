@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1656638120144,
@@ -20,6 +20,14 @@
                 {
                     "date": 1656714919959,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,17 @@\n-import { AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/compat/firestore';\n import { FirebaseService } from './services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n-import { take } from 'rxjs';\n \n @Component({\n   selector: 'app-root',\n   templateUrl: './app.component.html',\n   styleUrls: ['./app.component.css']\n })\n export class AppComponent implements OnInit {\n   title = 'parallax';\n+  version = '1.0.0'\n \n   constructor(private firebaseService: FirebaseService) {}\n \n   ngOnInit() {\n-    this.firebaseService.test().subscribe((collection: any[]) => {\n-      console.log(collection)\n-    });\n   }\n }\n"
+                },
+                {
+                    "date": 1656715671374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,6 +12,7 @@\n \n   constructor(private firebaseService: FirebaseService) {}\n \n   ngOnInit() {\n+    this.firebaseService.signIn();\n   }\n }\n"
+                },
+                {
+                    "date": 1656716652848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,8 @@\n \n   constructor(private firebaseService: FirebaseService) {}\n \n   ngOnInit() {\n-    this.firebaseService.signIn();\n+    // Sign in to firebase\n+    this.firebaseService.signIn(); \n   }\n }\n"
                 }
             ],
             "date": 1656638120144,

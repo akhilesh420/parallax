@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/app/models/firestore.model.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1656717028726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656718716411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,7 @@\n-import { FieldValue } from 'firebase/firestore'\r\n-\r\n export class Session {\r\n     constructor(\r\n         host_uid: string,\r\n-        timestamp: FieldValue,\r\n+        timestamp: Date,\r\n         participants: number\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656719669190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n export class Session {\r\n     constructor(\r\n-        host_uid: string,\r\n-        timestamp: Date,\r\n-        participants: number\r\n+        public host_uid: string,\r\n+        public timestamp: Date,\r\n+        public participants: number\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1656717028726,
+            "name": "Commit-0",
+            "content": "import { FieldValue } from 'firebase/firestore'\r\n\r\nexport class Session {\r\n    constructor(\r\n        host_uid: string,\r\n        timestamp: FieldValue,\r\n        participants: number\r\n    ){}\r\n}"
+        }
+    ]
+}

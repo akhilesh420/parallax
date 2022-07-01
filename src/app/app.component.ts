@@ -13,5 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
+    // Sign in to firebase
+    this.firebaseService.signIn(); 
   }
 }

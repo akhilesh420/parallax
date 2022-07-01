@@ -6,15 +6,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { SessionComponent } from './session/session.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SessionComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,10 @@ import { HomeComponent } from './home/home.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [
+    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+    { provide: PERSISTENCE, useValue: 'local' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

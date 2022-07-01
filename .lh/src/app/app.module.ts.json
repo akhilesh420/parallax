@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1656713334311,
@@ -12,6 +12,18 @@
                 {
                     "date": 1656713384284,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n import { environment } from './../environments/environment.prod';\n import { NgModule } from '@angular/core';\n import { BrowserModule } from '@angular/platform-browser';\n+\n+// Firebase\n import { AngularFireModule } from '@angular/fire/compat';\n+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';\n+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n@@ -14,9 +18,11 @@\n   ],\n   imports: [\n     BrowserModule,\n     AppRoutingModule,\n-    AngularFireModule.initializeApp(environment.firebase)\n+    AngularFireModule.initializeApp(environment.firebase),\n+    AngularFireAnalyticsModule,\n+    AngularFirestoreModule\n   ],\n   providers: [],\n   bootstrap: [AppComponent]\n })\n"
+                },
+                {
+                    "date": 1656715124028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n // Firebase\n import { AngularFireModule } from '@angular/fire/compat';\n import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';\n import { AngularFirestoreModule } from '@angular/fire/compat/firestore';\n+import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n@@ -22,8 +23,10 @@\n     AngularFireModule.initializeApp(environment.firebase),\n     AngularFireAnalyticsModule,\n     AngularFirestoreModule\n   ],\n-  providers: [],\n+  providers: [\n+    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } }\n+  ],\n   bootstrap: [AppComponent]\n })\n export class AppModule { }\n"
+                },
+                {
+                    "date": 1656715152048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,10 @@\n     AngularFireAnalyticsModule,\n     AngularFirestoreModule\n   ],\n   providers: [\n-    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } }\n+    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },\n+    { provide: USE_DEVICE_LANGUAGE, useValue: true }\n   ],\n   bootstrap: [AppComponent]\n })\n export class AppModule { }\n"
+                },
+                {
+                    "date": 1656715251102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n // Firebase\n import { AngularFireModule } from '@angular/fire/compat';\n import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';\n import { AngularFirestoreModule } from '@angular/fire/compat/firestore';\n-import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';\n+import { PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n@@ -24,10 +24,10 @@\n     AngularFireAnalyticsModule,\n     AngularFirestoreModule\n   ],\n   providers: [\n-    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },\n-    { provide: USE_DEVICE_LANGUAGE, useValue: true }\n+    { provide: USE_DEVICE_LANGUAGE, useValue: true },\n+    { provide: PERSISTENCE, useValue: 'local' },\n   ],\n   bootstrap: [AppComponent]\n })\n export class AppModule { }\n"
                 }
             ],
             "date": 1656713334311,

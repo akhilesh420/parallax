@@ -1,0 +1,62 @@
+{
+    "sourceFile": "src/app/home/home.component.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1656717083832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656717204825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n \n @Component({\n   selector: 'app-home',\n@@ -6,14 +7,15 @@\n   styleUrls: ['./home.component.css']\n })\n export class HomeComponent implements OnInit {\n \n-  constructor() { }\n+  constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n   }\n \n   createSession() {\n+    const user_uid = this.firebaseService.getUserUid();\n     \n   }\n \n }\n"
+                },
+                {
+                    "date": 1656717985098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n+import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n+import { FieldValue } from 'firebase/firestore'\n \n+\n @Component({\n   selector: 'app-home',\n   templateUrl: './home.component.html',\n   styleUrls: ['./home.component.css']\n@@ -14,8 +17,10 @@\n   }\n \n   createSession() {\n     const user_uid = this.firebaseService.getUserUid();\n-    \n+    let session: Session = new Session(user_uid, this.firebaseService.);\n+    session.\n+    // this.firebaseService.createSession(se)\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656718716411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n-import { FieldValue } from 'firebase/firestore'\n+import { Router } from '@angular/router';\n \n \n @Component({\n   selector: 'app-home',\n@@ -10,17 +10,23 @@\n   styleUrls: ['./home.component.css']\n })\n export class HomeComponent implements OnInit {\n \n-  constructor(private firebaseService: FirebaseService) { }\n+  constructor(\n+    private firebaseService: FirebaseService,\n+    private router: Router\n+  ) { }\n \n   ngOnInit(): void {\n   }\n \n   createSession() {\n     const user_uid = this.firebaseService.getUserUid();\n-    let session: Session = new Session(user_uid, this.firebaseService.);\n-    session.\n-    // this.firebaseService.createSession(se)\n+    if (user_uid) {\n+      let session: Session = new Session(user_uid, new Date(), 0);\n+      this.firebaseService.createSession(session)\n+        // .then(sid => this.router.navigate([`session/${sid}`]));\n+        .then(sid => console.log(sid));\n+    }\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656718859012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n+import { DocumentReference } from '@angular/fire/compat/firestore';\n \n \n @Component({\n   selector: 'app-home',\n@@ -24,9 +25,9 @@\n     if (user_uid) {\n       let session: Session = new Session(user_uid, new Date(), 0);\n       this.firebaseService.createSession(session)\n         // .then(sid => this.router.navigate([`session/${sid}`]));\n-        .then(sid => console.log(sid));\n+        .then((sid: DocumentReference<any> | void) => console.log());\n     }\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656719120086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n-import { DocumentReference } from '@angular/fire/compat/firestore';\n+import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';\n \n \n @Component({\n   selector: 'app-home',\n@@ -24,10 +24,9 @@\n     const user_uid = this.firebaseService.getUserUid();\n     if (user_uid) {\n       let session: Session = new Session(user_uid, new Date(), 0);\n       this.firebaseService.createSession(session)\n-        // .then(sid => this.router.navigate([`session/${sid}`]));\n-        .then((sid: DocumentReference<any> | void) => console.log());\n+        .then(sid => this.router.navigate([`session/${sid}`]));\n     }\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656719147951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,10 @@\n     const user_uid = this.firebaseService.getUserUid();\n     if (user_uid) {\n       let session: Session = new Session(user_uid, new Date(), 0);\n       this.firebaseService.createSession(session)\n-        .then(sid => this.router.navigate([`session/${sid}`]));\n+        .then(sid => this.router.navigate([`session/${sid}`]))\n+        .catch(error => console.log(error));\n     }\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656719326091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \n   createSession() {\n     const user_uid = this.firebaseService.getUserUid();\n     if (user_uid) {\n-      let session: Session = new Session(user_uid, new Date(), 0);\n+      const session: Session = new Session(user_uid, new Date(), 0);\n       this.firebaseService.createSession(session)\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n     }\n"
+                },
+                {
+                    "date": 1656719339745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n   createSession() {\n     const user_uid = this.firebaseService.getUserUid();\n     if (user_uid) {\n       const session: Session = new Session(user_uid, new Date(), 0);\n+      console.log(session)\n       this.firebaseService.createSession(session)\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n     }\n"
+                },
+                {
+                    "date": 1656719387109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,9 @@\n import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n-import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';\n \n-\n @Component({\n   selector: 'app-home',\n   templateUrl: './home.component.html',\n   styleUrls: ['./home.component.css']\n"
+                },
+                {
+                    "date": 1656719450818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,11 +20,9 @@\n \n   createSession() {\n     const user_uid = this.firebaseService.getUserUid();\n     if (user_uid) {\n-      const session: Session = new Session(user_uid, new Date(), 0);\n-      console.log(session)\n-      this.firebaseService.createSession(session)\n+      this.firebaseService.createSession()\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n     }\n   }\n"
+                },
+                {
+                    "date": 1656719659159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n"
+                }
+            ],
+            "date": 1656717083832,
+            "name": "Commit-0",
+            "content": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.css']\n})\nexport class HomeComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n  createSession() {\n    \n  }\n\n}\n"
+        }
+    ]
+}

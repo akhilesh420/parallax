@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 32,
             "patches": [
                 {
                     "date": 1656713612870,
@@ -12,6 +12,130 @@
                 {
                     "date": 1656713954593,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { Injectable } from '@angular/core';\n import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';\n+import { Observable } from 'rxjs';\n \n @Injectable({\n   providedIn: 'root'\n })\n export class FirebaseService {\n \n   constructor(private firestore: AngularFirestore) { }\n \n-  test(): AngularFirestoreCollection {\n-    return this.firestore.collection('sessions')\n+  test(): Observable<any[]> {\n+    return this.firestore.collection('sessions').valueChanges()\n   }\n }\n"
+                },
+                {
+                    "date": 1656715251103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n export class FirebaseService {\n \n   constructor(private firestore: AngularFirestore) { }\n \n-  test(): Observable<any[]> {\n+  signIn(): Observable<any[]> {\n     return this.firestore.collection('sessions').valueChanges()\n   }\n }\n"
+                },
+                {
+                    "date": 1656715289667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,19 @@\n import { Injectable } from '@angular/core';\n import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';\n+import { AngularFireAuth } from '@angular/fire/compat/auth';\n import { Observable } from 'rxjs';\n \n @Injectable({\n   providedIn: 'root'\n })\n export class FirebaseService {\n \n-  constructor(private firestore: AngularFirestore) { }\n+  constructor(\n+    private auth: AngularFireAuth,\n+    private firestore: AngularFirestore\n+  ) { }\n \n-  signIn(): Observable<any[]> {\n-    return this.firestore.collection('sessions').valueChanges()\n+  signIn() {\n+\n   }\n }\n"
+                },
+                {
+                    "date": 1656715399121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,14 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n-\n+    this.auth.signInAnonymously()\n+    .then(() => {\n+      console.log('logged in')\n+    })\n+    .catch((error) => {\n+      const errorCode = error.code;\n+      const errorMessage = error.message;\n+    });\n   }\n }\n"
+                },
+                {
+                    "date": 1656715609635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,19 @@\n     this.auth.signInAnonymously()\n     .then(() => {\n       console.log('logged in')\n     })\n-    .catch((error) => {\n-      const errorCode = error.code;\n-      const errorMessage = error.message;\n-    });\n+    .catch(error => this.handleError(error));\n   }\n+\n+    // --------------------------------------- Error handling ---------------------------------------\n+    handleError(error: any) {\n+      let errorMessage = 'Unknown error!';\n+      if (error.error instanceof ErrorEvent) {\n+        // Client-side errors\n+        errorMessage = `Error: ${error.error.message}`;\n+      } else {\n+        // Server-side errors\n+        errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n+      }\n+    }\n }\n"
+                },
+                {
+                    "date": 1656715622539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,6 +30,8 @@\n       } else {\n         // Server-side errors\n         errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n       }\n+      console.log(errorMessage)\n+      return errorMessage\n     }\n }\n"
+                },
+                {
+                    "date": 1656715638920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,7 +31,7 @@\n         // Server-side errors\n         errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n       }\n       console.log(errorMessage)\n-      return errorMessage\n+      throw(errorMessage)\n     }\n }\n"
+                },
+                {
+                    "date": 1656715684738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   signIn() {\n     this.auth.signInAnonymously()\n     .then(() => {\n-      console.log('logged in')\n+      console.log('signed in')\n     })\n     .catch(error => this.handleError(error));\n   }\n \n"
+                },
+                {
+                    "date": 1656716266266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,26 @@\n import { Injectable } from '@angular/core';\n import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';\n import { AngularFireAuth } from '@angular/fire/compat/auth';\n-import { Observable } from 'rxjs';\n+import { BehaviorSubject } from 'rxjs'\n+import { User } from \"firebase/auth\";\n \n @Injectable({\n   providedIn: 'root'\n })\n export class FirebaseService {\n \n+  private uid: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);\n+\n   constructor(\n     private auth: AngularFireAuth,\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n     this.auth.signInAnonymously()\n-    .then(() => {\n+    .then((user) => {\n+      this.uid.next(user.user ? user.user.uid : null);\n       console.log('signed in')\n     })\n     .catch(error => this.handleError(error));\n   }\n"
+                },
+                {
+                    "date": 1656716282166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   signIn() {\n     this.auth.signInAnonymously()\n     .then((user) => {\n-      this.uid.next(user.user ? user.user.uid : null);\n+      this.uid.next(!!user.user ? user.user.uid : null);\n       console.log('signed in')\n     })\n     .catch(error => this.handleError(error));\n   }\n"
+                },
+                {
+                    "date": 1656716294404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   signIn() {\n     this.auth.signInAnonymously()\n     .then((user) => {\n       this.uid.next(!!user.user ? user.user.uid : null);\n-      console.log('signed in')\n+      console.log('signed in', this.uid.value)\n     })\n     .catch(error => this.handleError(error));\n   }\n \n"
+                },
+                {
+                    "date": 1656716301318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   signIn() {\n     this.auth.signInAnonymously()\n     .then((user) => {\n       this.uid.next(!!user.user ? user.user.uid : null);\n-      console.log('signed in', this.uid.value)\n+      console.log('signed in')\n     })\n     .catch(error => this.handleError(error));\n   }\n \n"
+                },
+                {
+                    "date": 1656716547524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,14 +16,12 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n-    this.auth.signInAnonymously()\n-    .then((user) => {\n-      this.uid.next(!!user.user ? user.user.uid : null);\n-      console.log('signed in')\n-    })\n+    this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n+\n+    this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n   }\n \n     // --------------------------------------- Error handling ---------------------------------------\n     handleError(error: any) {\n"
+                },
+                {
+                    "date": 1656716553124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,12 +16,12 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n+    this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n+\n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n-\n-    this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n   }\n \n     // --------------------------------------- Error handling ---------------------------------------\n     handleError(error: any) {\n"
+                },
+                {
+                    "date": 1656716574375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,12 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n-    this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n+    this.auth.onAuthStateChanged(user => {\n+      this.uid.next(!user ? null : user.uid)\n+      console.log(this.uid.value);\n+    });\n \n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n   }\n"
+                },
+                {
+                    "date": 1656716608502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,13 +16,10 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n-    this.auth.onAuthStateChanged(user => {\n-      this.uid.next(!user ? null : user.uid)\n-      console.log(this.uid.value);\n-    });\n-\n+    this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n+    \n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n   }\n \n"
+                },
+                {
+                    "date": 1656716628720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,12 @@\n     private firestore: AngularFirestore\n   ) { }\n \n   signIn() {\n+    // Update uid on auth change\n     this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n-    \n+\n+    // Sign in anonymously\n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n   }\n \n"
+                },
+                {
+                    "date": 1656716634326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,18 +24,18 @@\n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n   }\n \n-    // --------------------------------------- Error handling ---------------------------------------\n-    handleError(error: any) {\n-      let errorMessage = 'Unknown error!';\n-      if (error.error instanceof ErrorEvent) {\n-        // Client-side errors\n-        errorMessage = `Error: ${error.error.message}`;\n-      } else {\n-        // Server-side errors\n-        errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n-      }\n-      console.log(errorMessage)\n-      throw(errorMessage)\n+  // --------------------------------------- Error handling ---------------------------------------\n+  handleError(error: any) {\n+    let errorMessage = 'Unknown error!';\n+    if (error.error instanceof ErrorEvent) {\n+      // Client-side errors\n+      errorMessage = `Error: ${error.error.message}`;\n+    } else {\n+      // Server-side errors\n+      errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n     }\n+    console.log(errorMessage)\n+    throw(errorMessage)\n+  }\n }\n"
+                },
+                {
+                    "date": 1656717204826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,12 @@\n     this.auth.signInAnonymously().then()\n     .catch(error => this.handleError(error));\n   }\n \n+  getUserUid(): string | null {\n+    return this.uid.value\n+  }\n+\n   // --------------------------------------- Error handling ---------------------------------------\n   handleError(error: any) {\n     let errorMessage = 'Unknown error!';\n     if (error.error instanceof ErrorEvent) {\n"
+                },
+                {
+                    "date": 1656717252979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,11 @@\n     private auth: AngularFireAuth,\n     private firestore: AngularFirestore\n   ) { }\n \n+\n+  // --------------------------------------- Authentication ---------------------------------------\n+\n   signIn() {\n     // Update uid on auth change\n     this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n \n@@ -28,8 +31,11 @@\n   getUserUid(): string | null {\n     return this.uid.value\n   }\n \n+  // --------------------------------------- Firestore ---------------------------------------\n+\n+\n   // --------------------------------------- Error handling ---------------------------------------\n   handleError(error: any) {\n     let errorMessage = 'Unknown error!';\n     if (error.error instanceof ErrorEvent) {\n"
+                },
+                {
+                    "date": 1656717381147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { Session } from './../models/firestore.model';\n import { Injectable } from '@angular/core';\n import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';\n import { AngularFireAuth } from '@angular/fire/compat/auth';\n import { BehaviorSubject } from 'rxjs'\n@@ -33,8 +34,12 @@\n   }\n \n   // --------------------------------------- Firestore ---------------------------------------\n \n+  createSession(session: Session) {\n+    return this.firestore.collection('sessions').add(session)\n+    .catch(error => this.handleError(error))\n+  }\n \n   // --------------------------------------- Error handling ---------------------------------------\n   handleError(error: any) {\n     let errorMessage = 'Unknown error!';\n"
+                },
+                {
+                    "date": 1656717985100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,13 @@\n import { Session } from './../models/firestore.model';\n import { Injectable } from '@angular/core';\n-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';\n+import { AngularFirestore } from '@angular/fire/compat/firestore';\n import { AngularFireAuth } from '@angular/fire/compat/auth';\n import { BehaviorSubject } from 'rxjs'\n-import { User } from \"firebase/auth\";\n \n+import firebase from 'firebase/app';\n+import 'firebase/firestore';\n+\n @Injectable({\n   providedIn: 'root'\n })\n export class FirebaseService {\n@@ -34,8 +36,12 @@\n   }\n \n   // --------------------------------------- Firestore ---------------------------------------\n \n+  getServerTimestamp() {\n+    return firebase.firestore.FieldValue.serverTimestamp();\n+  }\n+\n   createSession(session: Session) {\n     return this.firestore.collection('sessions').add(session)\n     .catch(error => this.handleError(error))\n   }\n"
+                },
+                {
+                    "date": 1656718716414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,8 @@\n import { AngularFirestore } from '@angular/fire/compat/firestore';\n import { AngularFireAuth } from '@angular/fire/compat/auth';\n import { BehaviorSubject } from 'rxjs'\n \n-import firebase from 'firebase/app';\n-import 'firebase/firestore';\n-\n @Injectable({\n   providedIn: 'root'\n })\n export class FirebaseService {\n@@ -36,11 +33,8 @@\n   }\n \n   // --------------------------------------- Firestore ---------------------------------------\n \n-  getServerTimestamp() {\n-    return firebase.firestore.FieldValue.serverTimestamp();\n-  }\n \n   createSession(session: Session) {\n     return this.firestore.collection('sessions').add(session)\n     .catch(error => this.handleError(error))\n"
+                },
+                {
+                    "date": 1656718742160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     this.auth.onAuthStateChanged(user => this.uid.next(!user ? null : user.uid));\n \n     // Sign in anonymously\n     this.auth.signInAnonymously().then()\n-    .catch(error => this.handleError(error));\n+      .catch(error => this.handleError(error));\n   }\n \n   getUserUid(): string | null {\n     return this.uid.value\n@@ -35,10 +35,10 @@\n   // --------------------------------------- Firestore ---------------------------------------\n \n \n   createSession(session: Session) {\n-    return this.firestore.collection('sessions').add(session)\n-    .catch(error => this.handleError(error))\n+    return this.firestore.collection('sessions').add({...session})\n+      .catch(error => this.handleError(error))\n   }\n \n   // --------------------------------------- Error handling ---------------------------------------\n   handleError(error: any) {\n@@ -50,7 +50,7 @@\n       // Server-side errors\n       errorMessage = `Error Code: ${error.status}\\nMessage: ${error.message}`;\n     }\n     console.log(errorMessage)\n-    throw(errorMessage)\n+    throw (errorMessage)\n   }\n }\n"
+                },
+                {
+                    "date": 1656719120086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,12 @@\n \n   // --------------------------------------- Firestore ---------------------------------------\n \n \n-  createSession(session: Session) {\n-    return this.firestore.collection('sessions').add({...session})\n+  createSession(session: Session): Promise<string | void> {\n+    const sid = this.firestore.createId();\n+    return this.firestore.collection('sessions').doc(sid).set({ ...session })\n+      .then(() => sid)\n       .catch(error => this.handleError(error))\n   }\n \n   // --------------------------------------- Error handling ---------------------------------------\n"
+                },
+                {
+                    "date": 1656719189319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n \n \n   createSession(session: Session): Promise<string | void> {\n     const sid = this.firestore.createId();\n+    console.log(session);\n     return this.firestore.collection('sessions').doc(sid).set({ ...session })\n       .then(() => sid)\n       .catch(error => this.handleError(error))\n   }\n"
+                },
+                {
+                    "date": 1656719311410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \n \n   createSession(session: Session): Promise<string | void> {\n     const sid = this.firestore.createId();\n-    console.log(session);\n+    console.log({...session});\n     return this.firestore.collection('sessions').doc(sid).set({ ...session })\n       .then(() => sid)\n       .catch(error => this.handleError(error))\n   }\n"
+                },
+                {
+                    "date": 1656719450832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,11 +34,11 @@\n \n   // --------------------------------------- Firestore ---------------------------------------\n \n \n-  createSession(session: Session): Promise<string | void> {\n+  createSession(): Promise<string | void> {\n     const sid = this.firestore.createId();\n-    console.log({...session});\n+    const session: Session = new Session(this.getUserUid, new Date(), 0);\n     return this.firestore.collection('sessions').doc(sid).set({ ...session })\n       .then(() => sid)\n       .catch(error => this.handleError(error))\n   }\n"
+                },
+                {
+                    "date": 1656719520700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,12 +36,16 @@\n \n \n   createSession(): Promise<string | void> {\n     const sid = this.firestore.createId();\n-    const session: Session = new Session(this.getUserUid, new Date(), 0);\n-    return this.firestore.collection('sessions').doc(sid).set({ ...session })\n-      .then(() => sid)\n-      .catch(error => this.handleError(error))\n+    const uid = this.getUserUid();\n+    if (uid) {\n+      const session: Session = new Session(uid, new Date(), 0);\n+      return this.firestore.collection('sessions').doc(sid).set({ ...session })\n+        .then(() => sid)\n+        .catch(error => this.handleError(error))\n+    }\n+    throw('User not logged in')\n   }\n \n   // --------------------------------------- Error handling ---------------------------------------\n   handleError(error: any) {\n"
+                },
+                {
+                    "date": 1656719551885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     const sid = this.firestore.createId();\n     const uid = this.getUserUid();\n     if (uid) {\n       const session: Session = new Session(uid, new Date(), 0);\n-      return this.firestore.collection('sessions').doc(sid).set({ ...session })\n+      return this.firestore.collection('sessions').doc(sid).set({ test: '420' })\n         .then(() => sid)\n         .catch(error => this.handleError(error))\n     }\n     throw('User not logged in')\n"
+                },
+                {
+                    "date": 1656719627902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,10 @@\n     const sid = this.firestore.createId();\n     const uid = this.getUserUid();\n     if (uid) {\n       const session: Session = new Session(uid, new Date(), 0);\n-      return this.firestore.collection('sessions').doc(sid).set({ test: '420' })\n+      console.log(session);\n+      return this.firestore.collection('sessions').doc(sid).set({ ...session })\n         .then(() => sid)\n         .catch(error => this.handleError(error))\n     }\n     throw('User not logged in')\n"
+                },
+                {
+                    "date": 1656719691262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,8 @@\n     const sid = this.firestore.createId();\n     const uid = this.getUserUid();\n     if (uid) {\n       const session: Session = new Session(uid, new Date(), 0);\n-      console.log(session);\n       return this.firestore.collection('sessions').doc(sid).set({ ...session })\n         .then(() => sid)\n         .catch(error => this.handleError(error))\n     }\n"
                 }
             ],
             "date": 1656713612870,
