@@ -1,1 +1,163 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Updock&display=swap');
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  image-rendering: optimizeQuality;
+}
+
+body {
+  background-color: #EEDBCD;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.col {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.center {
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Updock';
+  font-size: 60px;
+  text-align: center;
+}
+
+input {
+  display: none;
+}
+
+.camera {
+  width: 64px;
+  height: 64px;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: #D08873;
+  cursor: pointer;
+}
+
+.camera > img {
+  width: 36px;
+  transform: translate(14px, 14px);
+}
+
+.button {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 2px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.button > img {
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+  filter: invert(100%);
+  width: 27px;
+  transform: translate(10.5px, 10.5px);
+}
+
+.accept {
+  background-color: #83C0AF;
+}
+
+.reject {
+  background-color: #E7676C;
+}
+
+.gap {
+  column-gap: 12px;
+}
+
+.gap-small {
+  column-gap: 5px;
+}
+
+.preview {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  width: calc(100vw - 8px);
+  margin: 48px 4px;
+  max-width: 767px;
+}
+
+.preview > img {
+  display: none;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+p {
+  padding-left: 4px;
+}
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+.create-session {
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: #83C0AF;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Progress bar*/
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background-color: #4D415E;
+  -webkit-animation: bubble 5.0s forwards; /* for less modern browsers */
+        animation: bubble 5.0s forwards;
+  animation-name: progress;
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}

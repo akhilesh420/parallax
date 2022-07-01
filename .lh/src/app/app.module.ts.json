@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/app.module.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1656713334311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656713384284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n import { environment } from './../environments/environment.prod';\n import { NgModule } from '@angular/core';\n import { BrowserModule } from '@angular/platform-browser';\n+\n+// Firebase\n import { AngularFireModule } from '@angular/fire/compat';\n+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';\n+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n@@ -14,9 +18,11 @@\n   ],\n   imports: [\n     BrowserModule,\n     AppRoutingModule,\n-    AngularFireModule.initializeApp(environment.firebase)\n+    AngularFireModule.initializeApp(environment.firebase),\n+    AngularFireAnalyticsModule,\n+    AngularFirestoreModule\n   ],\n   providers: [],\n   bootstrap: [AppComponent]\n })\n"
+                }
+            ],
+            "date": 1656713334311,
+            "name": "Commit-0",
+            "content": "import { environment } from './../environments/environment.prod';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { AngularFireModule } from '@angular/fire/compat';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { HomeComponent } from './home/home.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    HomeComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    AngularFireModule.initializeApp(environment.firebase)\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n"
+        }
+    ]
+}

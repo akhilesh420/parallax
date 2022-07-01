@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/styles.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1656712606081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1656712606081,
+            "name": "Commit-0",
+            "content": "/* You can add global styles to this file, and also import other style files */\n@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Updock&display=swap');\nhtml {\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  scroll-behavior: smooth;\n  image-rendering: optimizeQuality;\n}\n\nbody {\n  background-color: #EEDBCD;\n  height: 100%;\n  width: 100%;\n  padding: 0;\n  margin: 0;\n  overflow-x: hidden;\n  overflow-y: visible;\n  scroll-behavior: smooth;\n  -webkit-overflow-scrolling: touch;\n}\n\n::-webkit-scrollbar {\n  display: none;\n}\n\na:link {\n  text-decoration: inherit;\n  color: inherit;\n}\n\na:visited {\n  text-decoration: inherit;\n  color: inherit;\n}\n\n.col {\n  display: flex;\n  flex-flow: column nowrap;\n}\n\n.row {\n  display: flex;\n  flex-flow: row nowrap;\n}\n\n.center {\n  justify-content: center;\n}\n\nh1 {\n  font-family: 'Updock';\n  font-size: 60px;\n  text-align: center;\n}\n\ninput {\n  display: none;\n}\n\n.camera {\n  width: 64px;\n  height: 64px;\n  border: 2px solid black;\n  border-radius: 50%;\n  background-color: #D08873;\n  cursor: pointer;\n}\n\n.camera > img {\n  width: 36px;\n  transform: translate(14px, 14px);\n}\n\n.button {\n  display: none;\n  width: 48px;\n  height: 48px;\n  border: 2px solid black;\n  border-radius: 50%;\n  cursor: pointer;\n  margin-top: 8px;\n}\n\n.button > img {\n  -webkit-filter: invert(100%); /* Safari/Chrome */\n  filter: invert(100%);\n  width: 27px;\n  transform: translate(10.5px, 10.5px);\n}\n\n.accept {\n  background-color: #83C0AF;\n}\n\n.reject {\n  background-color: #E7676C;\n}\n\n.gap {\n  column-gap: 12px;\n}\n\n.gap-small {\n  column-gap: 5px;\n}\n\n.preview {\n  border-radius: 24px;\n  overflow: hidden;\n  position: relative;\n  width: calc(100vw - 8px);\n  margin: 48px 4px;\n  max-width: 767px;\n}\n\n.preview > img {\n  display: none;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n\np {\n  padding-left: 4px;\n}\n\nh3 {\n  font-family: 'Poppins', sans-serif;\n  font-weight: 400;\n  color: white;\n  text-align: center;\n  margin: 0;\n}\n\n.create-session {\n  border: 2px solid black;\n  border-radius: 12px;\n  background-color: #83C0AF;\n  cursor: pointer;\n  padding: 5px;\n}\n\n/* Progress bar*/\n.progress {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 6px;\n  background-color: #4D415E;\n  -webkit-animation: bubble 5.0s forwards; /* for less modern browsers */\n        animation: bubble 5.0s forwards;\n  animation-name: progress;\n}\n\n@keyframes progress {\n  from {\n    width: 0%;\n  }\n\n  to {\n    width: 100%;\n  }\n}"
+        }
+    ]
+}

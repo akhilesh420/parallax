@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/app/app.component.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1656638120144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656638142414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+<router-outlet></router-outlet>\n"
+                },
+                {
+                    "date": 1656712635928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,19 @@\n+<div class=\"row center\">\n+    <div class=\"col\">\n+        <div class=\"row center\">\n+            <a href=\"index.html\"><h1>Parallax</h1></a>\n+        </div>\n+        <div class=\"row center gap-small create-session\" id=\"create\">\n+            <div class=\"col center\">\n+                <div class=\"row\">\n+                    <h3>create session</h3>\n+                </div>\n+            </div>\n+        </div>\n+        <div class=\"row\">\n+            <div class=\"col\">\n+            </div>\n+        </div>\n+    </div>\n+</div>\n <router-outlet></router-outlet>\n"
+                },
+                {
+                    "date": 1656712650094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,15 @@\n     <div class=\"col\">\n         <div class=\"row center\">\n             <a href=\"index.html\"><h1>Parallax</h1></a>\n         </div>\n-        <div class=\"row center gap-small create-session\" id=\"create\">\n+        <!-- <div class=\"row center gap-small create-session\" id=\"create\">\n             <div class=\"col center\">\n                 <div class=\"row\">\n                     <h3>create session</h3>\n                 </div>\n             </div>\n-        </div>\n+        </div> -->\n         <div class=\"row\">\n             <div class=\"col\">\n             </div>\n         </div>\n"
+                },
+                {
+                    "date": 1656712661650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n     <div class=\"col\">\n         <div class=\"row center\">\n             <a href=\"index.html\"><h1>Parallax</h1></a>\n         </div>\n+        <router-outlet></router-outlet>\n         <!-- <div class=\"row center gap-small create-session\" id=\"create\">\n             <div class=\"col center\">\n                 <div class=\"row\">\n                     <h3>create session</h3>\n@@ -15,5 +16,4 @@\n             </div>\n         </div>\n     </div>\n </div>\n-<router-outlet></router-outlet>\n"
+                },
+                {
+                    "date": 1656712671575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n                     <h3>create session</h3>\n                 </div>\n             </div>\n         </div> -->\n-        <div class=\"row\">\n+        <!-- <div class=\"row\">\n             <div class=\"col\">\n             </div>\n-        </div>\n+        </div> -->\n     </div>\n </div>\n"
+                },
+                {
+                    "date": 1656712695801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,8 @@\n         <div class=\"row center\">\n             <a href=\"index.html\"><h1>Parallax</h1></a>\n         </div>\n         <router-outlet></router-outlet>\n-        <!-- <div class=\"row center gap-small create-session\" id=\"create\">\n-            <div class=\"col center\">\n-                <div class=\"row\">\n-                    <h3>create session</h3>\n-                </div>\n-            </div>\n-        </div> -->\n         <!-- <div class=\"row\">\n             <div class=\"col\">\n             </div>\n         </div> -->\n"
+                }
+            ],
+            "date": 1656638120144,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

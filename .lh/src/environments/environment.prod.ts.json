@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/environments/environment.prod.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1656641263308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1656641263307,
+            "name": "Commit-0",
+            "content": "export const environment = {\n  production: true,\n  firebase: {\n    apiKey: \"AIzaSyDkBD-nSRvKxCn1X7jQAdA8HvyhdSLb7Ho\",\n    authDomain: \"parallax-app-4db18.firebaseapp.com\",\n    projectId: \"parallax-app-4db18\",\n    storageBucket: \"parallax-app-4db18.appspot.com\",\n    messagingSenderId: \"514362574723\",\n    appId: \"1:514362574723:web:262494240ddcf7106098b6\",\n    measurementId: \"G-0HDPVKN1TY\"\n  }\n};\n"
+        }
+    ]
+}
