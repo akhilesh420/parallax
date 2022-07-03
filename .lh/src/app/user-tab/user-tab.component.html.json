@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 18,
+            "activePatchIndex": 26,
             "patches": [
                 {
                     "date": 1656808892627,
@@ -80,6 +80,38 @@
                 {
                     "date": 1656810230448,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh </h4>\n+        <h4>Akhilesh Sharma Rajesh</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656880871339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma Rajesh</h4>\n+        <h4>Akhilesh Sharma</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656881108334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma</h4>\n+        <h4>{{username}}</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656881565343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,7 @@\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n+        <img src=\"assets/star.svg\" alt=\"\">\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881571880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>{{username}}</h4>\n     </div>\n     <div class=\"col\">\n-        <div class=\"status\">\n-        </div>\n+        <!-- <div class=\"status\">\n+        </div> -->\n         <img src=\"assets/star.svg\" alt=\"\">\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881601375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,7 @@\n     </div>\n     <div class=\"col\">\n         <!-- <div class=\"status\">\n         </div> -->\n-        <img src=\"assets/star.svg\" alt=\"\">\n+        <img src=\"assets/icons/star.svg\" alt=\"\">\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881635278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,9 @@\n     </div>\n     <div class=\"col\">\n         <!-- <div class=\"status\">\n         </div> -->\n-        <img src=\"assets/icons/star.svg\" alt=\"\">\n+        <div class=\"icon\">\n+            <img src=\"assets/icons/star.svg\" alt=\"\">\n+        </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881753172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n     <div class=\"col grow-user\">\n         <h4>{{username}}</h4>\n     </div>\n     <div class=\"col\">\n-        <!-- <div class=\"status\">\n-        </div> -->\n+        <div class=\"status\">\n+        </div>\n         <div class=\"icon\">\n             <img src=\"assets/icons/star.svg\" alt=\"\">\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1656882007235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,11 @@\n     <div class=\"col grow-user\">\n         <h4>{{username}}</h4>\n     </div>\n     <div class=\"col\">\n-        <div class=\"status\">\n-        </div>\n-        <div class=\"icon\">\n+        <!-- <div class=\"status\">\n+        </div> -->\n+        <div *ngIf=\"host === uid\"  class=\"icon\">\n             <img src=\"assets/icons/star.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1656808892627,

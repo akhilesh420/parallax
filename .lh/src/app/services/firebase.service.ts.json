@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 71,
+            "activePatchIndex": 79,
             "patches": [
                 {
                     "date": 1656713612870,
@@ -292,6 +292,38 @@
                 {
                     "date": 1656811392217,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     const uid = this.getUserUid();\n     if (uid) {\n \n       const sessionDocRef = this.firestore.firestore.collection('sessions').doc(sid);\n-      const userDocRef = sessionDocRef.collection('users').doc(uid);\n+      const userDocRef = sessionDocRef.collection('participants').doc(uid);\n \n       const transaction = this.firestore.firestore.runTransaction(async (transaction) => {\n         let unum = 0;\n \n"
+                },
+                {
+                    "date": 1656881940823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,10 +98,10 @@\n           } else {\n             unum = userDoc.data()?.['userNumber'];\n           }\n \n-          const isHost = uid === sessionDoc.data()?.['host_uid'];\n-          return { isHost: isHost, unum: unum, session: sessionDoc.data() };\n+          const host_uid = sessionDoc.data()?.['host_uid'];\n+          return { host_uid: host_uid, unum: unum, session: sessionDoc.data() };\n         });\n       });\n \n       return transaction.catch((e) => {\n"
+                },
+                {
+                    "date": 1656882858301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,11 +97,9 @@\n             transaction.set(userDocRef, { ...participant });\n           } else {\n             unum = userDoc.data()?.['userNumber'];\n           }\n-\n-          const host_uid = sessionDoc.data()?.['host_uid'];\n-          return { host_uid: host_uid, unum: unum, session: sessionDoc.data() };\n+          return { unum: unum, session: sessionDoc.data() };\n         });\n       });\n \n       return transaction.catch((e) => {\n"
+                },
+                {
+                    "date": 1656883310551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             transaction.set(userDocRef, { ...participant });\n           } else {\n             unum = userDoc.data()?.['userNumber'];\n           }\n-          return { unum: unum, session: sessionDoc.data() };\n+          return { unum: unum };\n         });\n       });\n \n       return transaction.catch((e) => {\n"
+                },
+                {
+                    "date": 1656885765694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { Participant, Session, User } from './../models/firestore.model';\n import { Injectable } from '@angular/core';\n import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';\n import { AngularFireAuth } from '@angular/fire/compat/auth';\n-import { BehaviorSubject, Observable, take } from 'rxjs'\n+import { BehaviorSubject, map, Observable, take } from 'rxjs'\n \n @Injectable({\n   providedIn: 'root'\n })\n@@ -68,8 +68,10 @@\n   }\n \n   getParticipants(sid: string): Observable<Participant[]>  {\n     return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants').valueChanges()\n+    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.getTime() - b.sessionStartTimestamp)))\n+    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.getTime() - b.sessionStartTimestamp)))\n   }\n   \n \n   addUserToSession(sid: string): Promise<any> | undefined {\n"
+                },
+                {
+                    "date": 1656885853811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,10 +68,9 @@\n   }\n \n   getParticipants(sid: string): Observable<Participant[]>  {\n     return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants').valueChanges()\n-    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.getTime() - b.sessionStartTimestamp)))\n-    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.getTime() - b.sessionStartTimestamp)))\n+    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.valueOf() - b.sessionStartTimestamp.valueOf())))\n   }\n   \n \n   addUserToSession(sid: string): Promise<any> | undefined {\n"
+                },
+                {
+                    "date": 1656885864350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n   }\n \n   getParticipants(sid: string): Observable<Participant[]>  {\n     return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants').valueChanges()\n-    .pipe(map(participants => participants.sort((a, b) => a.sessionStartTimestamp.valueOf() - b.sessionStartTimestamp.valueOf())))\n+    .pipe(map(participants => participants.sort((b, a) => a.sessionStartTimestamp.valueOf() - b.sessionStartTimestamp.valueOf())))\n   }\n   \n \n   addUserToSession(sid: string): Promise<any> | undefined {\n"
+                },
+                {
+                    "date": 1656886111804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,10 +67,9 @@\n     return this.firestore.collection('sessions').doc<Session>(sid).valueChanges()\n   }\n \n   getParticipants(sid: string): Observable<Participant[]>  {\n-    return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants').valueChanges()\n-    .pipe(map(participants => participants.sort((b, a) => a.sessionStartTimestamp.valueOf() - b.sessionStartTimestamp.valueOf())))\n+    return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants', ref => ref.orderBy(\"sessionStartTimestamp\")).valueChanges()\n   }\n   \n \n   addUserToSession(sid: string): Promise<any> | undefined {\n"
+                },
+                {
+                    "date": 1656886127492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,13 +66,14 @@\n   getSession(sid: string): Observable<Session | undefined> {\n     return this.firestore.collection('sessions').doc<Session>(sid).valueChanges()\n   }\n \n-  getParticipants(sid: string): Observable<Participant[]>  {\n-    return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants', ref => ref.orderBy(\"sessionStartTimestamp\")).valueChanges()\n+  getParticipants(sid: string): Observable<Participant[]> {\n+    return this.firestore.collection('sessions').doc(sid)\n+      .collection<Participant>('participants', ref => ref.orderBy(\"sessionStartTimestamp\")).valueChanges()\n   }\n-  \n \n+\n   addUserToSession(sid: string): Promise<any> | undefined {\n     const uid = this.getUserUid();\n     if (uid) {\n \n"
                 }
             ],
             "date": 1656713612870,

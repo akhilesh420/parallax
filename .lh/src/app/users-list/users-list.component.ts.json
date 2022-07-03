@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1656809185195,
@@ -32,6 +32,14 @@
                 {
                     "date": 1656880645861,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,10 @@\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n-    console.log(this.participants)\n   }\n \n   ngOnChanges() {\n-    console.log(this.participants)\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656881940811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n })\n export class UsersListComponent implements OnInit {\n \n   @Input() participants: Participant[] = [];\n+  @Input() host: string | null = null;\n \n-\n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n   }\n"
+                },
+                {
+                    "date": 1656882765402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n })\n export class UsersListComponent implements OnInit {\n \n   @Input() participants: Participant[] = [];\n-  @Input() host: string | null = null;\n+  @Input() host: string | undefined = undefined;\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n"
                 }
             ],
             "date": 1656809185195,

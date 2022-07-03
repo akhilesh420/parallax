@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1656638240613,
@@ -20,6 +20,14 @@
                 {
                     "date": 1656719286083,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { RouterModule, Routes } from '@angular/router';\n \n const routes: Routes = [\n   { path: '', redirectTo: '/', pathMatch: 'full' },\n-  { path: '', component: HomeComponent }\n+  { path: '', component: HomeComponent },\n   { path: 'session/:sid', component: SessionComponent }\n ];\n \n @NgModule({\n"
+                },
+                {
+                    "date": 1656886264865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n \n const routes: Routes = [\n   { path: '', redirectTo: '/', pathMatch: 'full' },\n   { path: '', component: HomeComponent },\n-  { path: 'session/:sid', component: SessionComponent }\n+  { path: 'session/:sid', component: SessionComponent },\n+  { path: 'submit/:sid', component: SessionComponent }\n ];\n \n @NgModule({\n   imports: [RouterModule.forRoot(routes)],\n"
+                },
+                {
+                    "date": 1656886295185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { SubmitComponent } from './submit/submit.component';\n import { SessionComponent } from './session/session.component';\n import { HomeComponent } from './home/home.component';\n import { NgModule } from '@angular/core';\n import { RouterModule, Routes } from '@angular/router';\n@@ -6,9 +7,9 @@\n const routes: Routes = [\n   { path: '', redirectTo: '/', pathMatch: 'full' },\n   { path: '', component: HomeComponent },\n   { path: 'session/:sid', component: SessionComponent },\n-  { path: 'submit/:sid', component: SessionComponent }\n+  { path: 'submit/:sid', component: SubmitComponent }\n ];\n \n @NgModule({\n   imports: [RouterModule.forRoot(routes)],\n"
                 }
             ],
             "date": 1656638240613,

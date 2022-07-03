@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 34,
+            "activePatchIndex": 87,
             "patches": [
                 {
                     "date": 1656723847402,
@@ -144,6 +144,218 @@
                 {
                     "date": 1656811367868,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       });\n \n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe()\n+      .subscribe(participants =>  this.participants = participants);\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                },
+                {
+                    "date": 1656880799121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,30 +23,31 @@\n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n-    this.setUpUser();\n-    this.route.paramMap.subscribe(paramMap => {\n-      this.sid = paramMap.get('sid');\n-      this.setUpSession();\n-    })\n-  }\n-\n-  setUpUser() {\n     this.firebaseService.isSignedIn()\n       .pipe(takeUntil(this.$notifier))\n       .subscribe((uid) => {\n         if (!uid) return;\n-        const information = this.firebaseService.getUserInformation(uid);\n-        if (!information) return\n-        information\n-          .pipe(takeUntil(this.$notifier))\n-          .subscribe((user: User | undefined) => {\n-            if (user) this.username = user.username;\n-          });\n+        this.setUpUser(uid);\n+        this.route.paramMap.subscribe(paramMap => {\n+          this.sid = paramMap.get('sid');\n+          this.setUpSession();\n+        })\n       })\n+\n   }\n \n+  setUpUser(uid: string) {\n+    const information = this.firebaseService.getUserInformation(uid);\n+    if (!information) return\n+    information\n+      .pipe(takeUntil(this.$notifier))\n+      .subscribe((user: User | undefined) => {\n+        if (user) this.username = user.username;\n+      });\n+  }\n+\n   setUpSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n@@ -56,9 +57,9 @@\n       });\n \n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe(participants =>  this.participants = participants);\n+      .subscribe(participants => this.participants = participants);\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                },
+                {
+                    "date": 1656881093901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,9 @@\n \n   }\n \n   setUpUser(uid: string) {\n-    const information = this.firebaseService.getUserInformation(uid);\n-    if (!information) return\n-    information\n+    this.firebaseService.getUserInformation(uid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe((user: User | undefined) => {\n         if (user) this.username = user.username;\n       });\n"
+                },
+                {
+                    "date": 1656881940814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  isHost: boolean = false;\n+  host_uid: boolean = false;\n   unum: number = 0;\n   participants: Participant[] = [];\n \n   constructor(private firebaseService: FirebaseService,\n@@ -48,9 +48,9 @@\n   setUpSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n-        this.isHost = response.isHost;\n+        this.host_uid = response.host_uid;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n       });\n \n"
+                },
+                {
+                    "date": 1656882034664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  host_uid: boolean = false;\n+  host_uid: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n \n   constructor(private firebaseService: FirebaseService,\n"
+                },
+                {
+                    "date": 1656882084733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  host_uid: string | null = null;\n+  hostUid: string | null = null;\n+  isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n \n   constructor(private firebaseService: FirebaseService,\n@@ -48,9 +49,9 @@\n   setUpSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n-        this.host_uid = response.host_uid;\n+        this.hostUid = response.host_uid;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n       });\n \n"
+                },
+                {
+                    "date": 1656882098444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  hostUid: string | null = null;\n+  host: string | null = null; //hOST UID\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n \n@@ -49,9 +49,9 @@\n   setUpSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n-        this.hostUid = response.host_uid;\n+        this.host = response.host_uid;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n       });\n \n"
+                },
+                {
+                    "date": 1656882105599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  host: string | null = null; //hOST UID\n+  host: string | null = null; //Host uid\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n \n"
+                },
+                {
+                    "date": 1656882148601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,20 +47,23 @@\n   }\n \n   setUpSession() {\n     if (!this.sid) return;\n-    this.firebaseService.addUserToSession(this.sid)\n-      ?.then((response) => {\n-        this.host = response.host_uid;\n-        this.unum = response.unum;\n-        this.currentSession = response.session;\n-      });\n-\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => this.participants = participants);\n   }\n \n+  joinSession() {\n+    if (!this.sid) return;\n+    this.firebaseService.addUserToSession(this.sid)\n+    ?.then((response) => {\n+      this.host = response.host_uid;\n+      this.unum = response.unum;\n+      this.currentSession = response.session;\n+    });\n+  }\n+\n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n   }\n \n"
+                },
+                {
+                    "date": 1656882201417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n   host: string | null = null; //Host uid\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n+  buttonText: string = 'Jaoin';\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n"
+                },
+                {
+                    "date": 1656882206985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   host: string | null = null; //Host uid\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n-  buttonText: string = 'Jaoin';\n+  buttonText: string = 'Join';\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n"
+                },
+                {
+                    "date": 1656882256021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,8 +55,9 @@\n   }\n \n   joinSession() {\n     if (!this.sid) return;\n+    if (!this.username || this.username.length == 0) return alert('Username is required')\n     this.firebaseService.addUserToSession(this.sid)\n     ?.then((response) => {\n       this.host = response.host_uid;\n       this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656882267055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,8 @@\n   }\n \n   joinSession() {\n     if (!this.sid) return;\n-    if (!this.username || this.username.length == 0) return alert('Username is required')\n     this.firebaseService.addUserToSession(this.sid)\n     ?.then((response) => {\n       this.host = response.host_uid;\n       this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656882280684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,8 +53,12 @@\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => this.participants = participants);\n   }\n \n+  onClick() {\n+    if (!this.username || this.username.length == 0) return alert('Username is required')\n+  }\n+\n   joinSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n     ?.then((response) => {\n"
+                },
+                {
+                    "date": 1656882345144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,12 @@\n     this.firebaseService.getUserInformation(uid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe((user: User | undefined) => {\n         if (user) this.username = user.username;\n+        if (this.username && this.username.length > 0) {\n+          this.buttonText = 'Start';\n+          this.joinSession();\n+        }\n       });\n   }\n \n   setUpSession() {\n"
+                },
+                {
+                    "date": 1656882404826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n   buttonText: string = 'Join';\n+  isJoined: boolean = false;\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n@@ -59,8 +60,10 @@\n   }\n \n   onClick() {\n     if (!this.username || this.username.length == 0) return alert('Username is required')\n+    if (this.isJoined) return\n+    if (!this.isJoined) this.joinSession();\n   }\n \n   joinSession() {\n     if (!this.sid) return;\n"
+                },
+                {
+                    "date": 1656882422756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,11 +59,13 @@\n       .subscribe(participants => this.participants = participants);\n   }\n \n   onClick() {\n-    if (!this.username || this.username.length == 0) return alert('Username is required')\n     if (this.isJoined) return\n-    if (!this.isJoined) this.joinSession();\n+    if (!this.isJoined) {\n+      if (!this.username || this.username.length == 0) return alert('Username is required')\n+      this.joinSession();\n+    }\n   }\n \n   joinSession() {\n     if (!this.sid) return;\n"
+                },
+                {
+                    "date": 1656882495164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,8 +73,9 @@\n     ?.then((response) => {\n       this.host = response.host_uid;\n       this.unum = response.unum;\n       this.currentSession = response.session;\n+      this.isJoined = true;\n     });\n   }\n \n   updateUsername() {\n"
+                },
+                {
+                    "date": 1656882515993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     this.firebaseService.getUserInformation(uid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe((user: User | undefined) => {\n         if (user) this.username = user.username;\n-        if (this.username && this.username.length > 0) {\n+        if (this.isHost && this.username && this.username.length > 0) {\n           this.buttonText = 'Start';\n           this.joinSession();\n         }\n       });\n"
+                },
+                {
+                    "date": 1656882633580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,12 +44,8 @@\n     this.firebaseService.getUserInformation(uid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe((user: User | undefined) => {\n         if (user) this.username = user.username;\n-        if (this.isHost && this.username && this.username.length > 0) {\n-          this.buttonText = 'Start';\n-          this.joinSession();\n-        }\n       });\n   }\n \n   setUpSession() {\n"
+                },
+                {
+                    "date": 1656882765408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n-  host: string | null = null; //Host uid\n+  host: string | undefined = undefined; //Host uid\n   isHost: string | null = null;\n   unum: number = 0;\n   participants: Participant[] = [];\n   buttonText: string = 'Join';\n@@ -49,11 +49,14 @@\n   }\n \n   setUpSession() {\n     if (!this.sid) return;\n+    this.firebaseService.getSession(this.sid)\n+      .pipe(takeUntil(this.$notifier))\n+      .subscribe(session => this.host = session?.host_uid);\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe(participants => this.participants = participants);\n+      .subscribe(participants => this.participants = participants); \n   }\n \n   onClick() {\n     if (this.isJoined) return\n"
+                },
+                {
+                    "date": 1656882858292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   host: string | undefined = undefined; //Host uid\n-  isHost: string | null = null;\n+  isHost: boolean = false;\n   unum: number = 0;\n   participants: Participant[] = [];\n   buttonText: string = 'Join';\n   isJoined: boolean = false;\n@@ -33,9 +33,9 @@\n         if (!uid) return;\n         this.setUpUser(uid);\n         this.route.paramMap.subscribe(paramMap => {\n           this.sid = paramMap.get('sid');\n-          this.setUpSession();\n+          this.setUpSession(uid);\n         })\n       })\n \n   }\n@@ -47,13 +47,16 @@\n         if (user) this.username = user.username;\n       });\n   }\n \n-  setUpSession() {\n+  setUpSession(uid: string) {\n     if (!this.sid) return;\n     this.firebaseService.getSession(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe(session => this.host = session?.host_uid);\n+      .subscribe(session => {\n+        this.host = session?.host_uid;\n+        this.isHost = this.host === uid;\n+      });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => this.participants = participants); \n   }\n"
+                },
+                {
+                    "date": 1656883005179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,8 +54,11 @@\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(session => {\n         this.host = session?.host_uid;\n         this.isHost = this.host === uid;\n+        if (this.isHost && this.username && this.username.length > 0) {\n+          this.joinSession();\n+        }\n       });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => this.participants = participants); \n@@ -63,9 +66,9 @@\n \n   onClick() {\n     if (this.isJoined) return\n     if (!this.isJoined) {\n-      if (!this.username || this.username.length == 0) return alert('Username is required')\n+      if (!this.username || this.username.length == 0) return alert('Username is required');\n       this.joinSession();\n     }\n   }\n \n"
+                },
+                {
+                    "date": 1656883092835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { Component, OnDestroy, OnInit } from '@angular/core';\n import { ActivatedRoute, Params } from '@angular/router';\n import { Subject, takeUntil, Observable } from 'rxjs';\n import { Session, User } from '../models/firestore.model';\n+import { resolve } from '@angular-devkit/core';\n \n @Component({\n   selector: 'app-session',\n   templateUrl: './session.component.html',\n@@ -60,9 +61,9 @@\n         }\n       });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe(participants => this.participants = participants); \n+      .subscribe(participants => this.participants = participants);\n   }\n \n   onClick() {\n     if (this.isJoined) return\n@@ -72,16 +73,17 @@\n     }\n   }\n \n   joinSession() {\n-    if (!this.sid) return;\n-    this.firebaseService.addUserToSession(this.sid)\n-    ?.then((response) => {\n-      this.host = response.host_uid;\n-      this.unum = response.unum;\n-      this.currentSession = response.session;\n-      this.isJoined = true;\n-    });\n+    return new Promise((resolve, reject) => {\n+      if (!this.sid) return;\n+      this.firebaseService.addUserToSession(this.sid)\n+        ?.then((response) => {\n+          this.unum = response.unum;\n+          this.currentSession = response.session;\n+          this.isJoined = true;\n+        })\n+    })\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                },
+                {
+                    "date": 1656883264954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       .subscribe(session => {\n         this.host = session?.host_uid;\n         this.isHost = this.host === uid;\n         if (this.isHost && this.username && this.username.length > 0) {\n-          this.joinSession();\n+          this.joinSession().then(() => this.buttonText == 'start');\n         }\n       });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n@@ -68,9 +68,9 @@\n   onClick() {\n     if (this.isJoined) return\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return alert('Username is required');\n-      this.joinSession();\n+      this.joinSession().then(() => console.log('successfully joined!'));\n     }\n   }\n \n   joinSession() {\n"
+                },
+                {
+                    "date": 1656883310535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n \n   username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n-  currentSession: Session | undefined;\n   host: string | undefined = undefined; //Host uid\n   isHost: boolean = false;\n   unum: number = 0;\n   participants: Participant[] = [];\n@@ -78,9 +77,8 @@\n       if (!this.sid) return;\n       this.firebaseService.addUserToSession(this.sid)\n         ?.then((response) => {\n           this.unum = response.unum;\n-          this.currentSession = response.session;\n           this.isJoined = true;\n         })\n     })\n   }\n"
+                },
+                {
+                    "date": 1656883345181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,12 @@\n       .subscribe(session => {\n         this.host = session?.host_uid;\n         this.isHost = this.host === uid;\n         if (this.isHost && this.username && this.username.length > 0) {\n-          this.joinSession().then(() => this.buttonText == 'start');\n+          this.joinSession().then(() => {\n+            this.buttonText == 'start';\n+            console.log('successfully joined!')\n+          });\n         }\n       });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n"
+                },
+                {
+                    "date": 1656883364415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,8 +77,9 @@\n \n   joinSession() {\n     return new Promise((resolve, reject) => {\n       if (!this.sid) return;\n+      console.log('joining session!')\n       this.firebaseService.addUserToSession(this.sid)\n         ?.then((response) => {\n           this.unum = response.unum;\n           this.isJoined = true;\n"
+                },
+                {
+                    "date": 1656883373605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,9 +78,9 @@\n   joinSession() {\n     return new Promise((resolve, reject) => {\n       if (!this.sid) return;\n       console.log('joining session!')\n-      this.firebaseService.addUserToSession(this.sid)\n+      return this.firebaseService.addUserToSession(this.sid)\n         ?.then((response) => {\n           this.unum = response.unum;\n           this.isJoined = true;\n         })\n"
+                },
+                {
+                    "date": 1656883400785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,13 +78,15 @@\n   joinSession() {\n     return new Promise((resolve, reject) => {\n       if (!this.sid) return;\n       console.log('joining session!')\n-      return this.firebaseService.addUserToSession(this.sid)\n-        ?.then((response) => {\n-          this.unum = response.unum;\n-          this.isJoined = true;\n-        })\n+      resolve(\n+        this.firebaseService.addUserToSession(this.sid)\n+          ?.then((response) => {\n+            this.unum = response.unum;\n+            this.isJoined = true;\n+          })\n+      )\n     })\n   }\n \n   updateUsername() {\n"
+                },
+                {
+                    "date": 1656883418609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n         this.host = session?.host_uid;\n         this.isHost = this.host === uid;\n         if (this.isHost && this.username && this.username.length > 0) {\n           this.joinSession().then(() => {\n-            this.buttonText == 'start';\n+            this.buttonText = 'start';\n             console.log('successfully joined!')\n           });\n         }\n       });\n"
+                },
+                {
+                    "date": 1656883514124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,8 +89,9 @@\n     })\n   }\n \n   updateUsername() {\n+    if (this.username) \n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n"
+                },
+                {
+                    "date": 1656883527440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     })\n   }\n \n   updateUsername() {\n-    if (this.username) \n+    if (!this.username || this.username.length == 0) return alert('Username is required');\n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n"
+                },
+                {
+                    "date": 1656883559743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,14 +89,16 @@\n     })\n   }\n \n   updateUsername() {\n-    if (!this.username || this.username.length == 0) return alert('Username is required');\n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n-    if (event.key === 'Enter') this.updateUsername();\n+    if (event.key === 'Enter') {\n+      if (!this.username || this.username.length == 0) return alert('Username is required');\n+      this.updateUsername();\n+    }\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656883668883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,10 +94,13 @@\n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') {\n-      if (!this.username || this.username.length == 0) return alert('Username is required');\n-      this.updateUsername();\n+      if (!this.username || this.username.length == 0) {\n+        alert('Username is required');\n+      } else {\n+        this.updateUsername();\n+      }\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656883685195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,13 +94,10 @@\n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') {\n-      if (!this.username || this.username.length == 0) {\n-        alert('Username is required');\n-      } else {\n-        this.updateUsername();\n-      }\n+      if (!this.username || this.username.length == 0) return alert('Username is required');\n+      this.updateUsername();\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656883714680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,8 +89,9 @@\n     })\n   }\n \n   updateUsername() {\n+    console.log('updating username');\n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n"
+                },
+                {
+                    "date": 1656883752252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,10 +95,13 @@\n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') {\n-      if (!this.username || this.username.length == 0) return alert('Username is required');\n-      this.updateUsername();\n+      if (!this.username || this.username.length == 0) { \n+        alert('Username is required');\n+      } else {\n+        this.updateUsername();\n+      }\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656883774261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     })\n   }\n \n   updateUsername() {\n-    console.log('updating username');\n+    console.log('updating username', this.username);\n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n"
+                },
+                {
+                    "date": 1656883856538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,20 +89,15 @@\n     })\n   }\n \n   updateUsername() {\n-    console.log('updating username', this.username);\n+    if (!this.username || this.username.length == 0) return alert('Username is required');\n     this.firebaseService.updateUsername(this.username);\n+\n   }\n \n   onEnter(event: KeyboardEvent) {\n-    if (event.key === 'Enter') {\n-      if (!this.username || this.username.length == 0) { \n-        alert('Username is required');\n-      } else {\n-        this.updateUsername();\n-      }\n-    }\n+    if (event.key === 'Enter') this.updateUsername();\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656884240649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n   unum: number = 0;\n   participants: Participant[] = [];\n   buttonText: string = 'Join';\n   isJoined: boolean = false;\n+  error: string | null = null;\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n@@ -69,9 +70,9 @@\n \n   onClick() {\n     if (this.isJoined) return\n     if (!this.isJoined) {\n-      if (!this.username || this.username.length == 0) return alert('Username is required');\n+      if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n       this.joinSession().then(() => console.log('successfully joined!'));\n     }\n   }\n \n@@ -89,9 +90,9 @@\n     })\n   }\n \n   updateUsername() {\n-    if (!this.username || this.username.length == 0) return alert('Username is required');\n+    this.error = (!this.username || this.username.length == 0) ? 'Username is required' : null;\n     this.firebaseService.updateUsername(this.username);\n \n   }\n \n"
+                },
+                {
+                    "date": 1656884279147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n       .subscribe(participants => this.participants = participants);\n   }\n \n   onClick() {\n-    if (this.isJoined) return\n+    // if (this.isJoined) return\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n       this.joinSession().then(() => console.log('successfully joined!'));\n     }\n"
+                },
+                {
+                    "date": 1656884301199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n       .subscribe(participants => this.participants = participants);\n   }\n \n   onClick() {\n-    // if (this.isJoined) return\n+    if (this.isJoined) return\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n       this.joinSession().then(() => console.log('successfully joined!'));\n     }\n"
+                },
+                {
+                    "date": 1656884323581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,12 +68,12 @@\n       .subscribe(participants => this.participants = participants);\n   }\n \n   onClick() {\n-    if (this.isJoined) return\n+    // if (this.isJoined) return\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n-      this.joinSession().then(() => console.log('successfully joined!'));\n+      return this.joinSession().then(() => console.log('successfully joined!'));\n     }\n   }\n \n   joinSession() {\n"
+                },
+                {
+                    "date": 1656884338158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,10 +71,11 @@\n   onClick() {\n     // if (this.isJoined) return\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n-      return this.joinSession().then(() => console.log('successfully joined!'));\n-    }\n+      this.joinSession().then(() => console.log('successfully joined!'));\n+    } \n+    return false\n   }\n \n   joinSession() {\n     return new Promise((resolve, reject) => {\n"
+                },
+                {
+                    "date": 1656884417345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n       this.joinSession().then(() => console.log('successfully joined!'));\n     } \n-    return false\n+    return;\n   }\n \n   joinSession() {\n     return new Promise((resolve, reject) => {\n@@ -85,8 +85,9 @@\n         this.firebaseService.addUserToSession(this.sid)\n           ?.then((response) => {\n             this.unum = response.unum;\n             this.isJoined = true;\n+            if (!this.isHost) this.buttonText = \"Waiting...\";\n           })\n       )\n     })\n   }\n"
+                },
+                {
+                    "date": 1656884466829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,10 +93,10 @@\n   }\n \n   updateUsername() {\n     this.error = (!this.username || this.username.length == 0) ? 'Username is required' : null;\n-    this.firebaseService.updateUsername(this.username);\n-\n+    if (!this.error) this.firebaseService.updateUsername(this.username);\n+  \n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') this.updateUsername();\n"
+                },
+                {
+                    "date": 1656884476933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,8 @@\n \n   updateUsername() {\n     this.error = (!this.username || this.username.length == 0) ? 'Username is required' : null;\n     if (!this.error) this.firebaseService.updateUsername(this.username);\n-  \n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') this.updateUsername();\n"
+                },
+                {
+                    "date": 1656884642618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,12 @@\n         }\n       });\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe(participants => this.participants = participants);\n+      .subscribe(participants => {\n+        this.participants = participants;\n+        if (participants.filter((participant) => participant.uid == uid).length > 0) this.buttonText = \"Waiting...\";\n+      });\n   }\n \n   onClick() {\n     // if (this.isJoined) return\n"
+                },
+                {
+                    "date": 1656884679075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => {\n         this.participants = participants;\n-        if (participants.filter((participant) => participant.uid == uid).length > 0) this.buttonText = \"Waiting...\";\n+        if (!this.isHost && participants.filter((participant) => participant.uid == uid).length > 0) {} this.buttonText = \"Waiting...\";\n       });\n   }\n \n   onClick() {\n"
+                },
+                {
+                    "date": 1656884690819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => {\n         this.participants = participants;\n-        if (!this.isHost && participants.filter((participant) => participant.uid == uid).length > 0) {} this.buttonText = \"Waiting...\";\n+        if (participants.filter((participant) => participant.uid == uid).length > 0) {} this.buttonText = \"Waiting...\";\n       });\n   }\n \n   onClick() {\n"
+                },
+                {
+                    "date": 1656884705667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n       .subscribe(participants => {\n         this.participants = participants;\n-        if (participants.filter((participant) => participant.uid == uid).length > 0) {} this.buttonText = \"Waiting...\";\n+        if (!this.isHost && participants.filter((participant) => participant.uid == uid).length > 0) this.buttonText = \"Waiting...\";\n       });\n   }\n \n   onClick() {\n"
+                },
+                {
+                    "date": 1656884765713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n         this.host = session?.host_uid;\n         this.isHost = this.host === uid;\n         if (this.isHost && this.username && this.username.length > 0) {\n           this.joinSession().then(() => {\n-            this.buttonText = 'start';\n+            this.buttonText = 'Start';\n             console.log('successfully joined!')\n           });\n         }\n       });\n"
+                },
+                {
+                    "date": 1656886246065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { Participant } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnDestroy, OnInit } from '@angular/core';\n-import { ActivatedRoute, Params } from '@angular/router';\n+import { ActivatedRoute, Params, Router } from '@angular/router';\n import { Subject, takeUntil, Observable } from 'rxjs';\n import { Session, User } from '../models/firestore.model';\n import { resolve } from '@angular-devkit/core';\n \n@@ -24,9 +24,10 @@\n   isJoined: boolean = false;\n   error: string | null = null;\n \n   constructor(private firebaseService: FirebaseService,\n-    private route: ActivatedRoute) { }\n+    private route: ActivatedRoute,\n+    private router: Router) { }\n \n   ngOnInit(): void {\n     this.firebaseService.isSignedIn()\n       .pipe(takeUntil(this.$notifier))\n@@ -71,13 +72,13 @@\n       });\n   }\n \n   onClick() {\n-    // if (this.isJoined) return\n+    if (this.isJoined && this.isHost) return this.router.navigate([`submit/${this.sid}`])\n     if (!this.isJoined) {\n       if (!this.username || this.username.length == 0) return this.error = 'Username is required';\n       this.joinSession().then(() => console.log('successfully joined!'));\n-    } \n+    }\n     return;\n   }\n \n   joinSession() {\n"
                 }
             ],
             "date": 1656723847402,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 34,
             "patches": [
                 {
                     "date": 1656720690001,
@@ -88,6 +88,62 @@
                 {
                     "date": 1656810891426,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n-                <app-users-list></app-users-list>\n+                <app-users-list [participants]=\"participants\"></app-users-list>\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n             <div class=\"col center\">\n"
+                },
+                {
+                    "date": 1656881166046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,17 @@\n             <div class=\"col center\">\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n+        <div class=\"row center gap-small create-button space\">\n+            <div class=\"col center\">\n+                <h3>Ready</h3>\n+            </div>\n+        </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n                 <app-users-list [participants]=\"participants\"></app-users-list>\n             </div>\n         </div>\n-        <div class=\"row center gap-small create-button space\">\n-            <div class=\"col center\">\n-                <h3>Ready</h3>\n-            </div>\n-        </div>\n+        \n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881181183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n             <div class=\"col center\">\n-                <h3>Ready</h3>\n+                <h3>Start</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656881266450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n-            <div class=\"col center\">\n+            <div class=\"col center restric\">\n                 <h3>Start</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n"
+                },
+                {
+                    "date": 1656881287686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n-            <div class=\"col center restric\">\n+            <div class=\"col center restrict\">\n                 <h3>Start</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n"
+                },
+                {
+                    "date": 1656881293483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n-            <div class=\"col center restrict\">\n+            <div class=\"col center\">\n                 <h3>Start</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n"
+                },
+                {
+                    "date": 1656881534906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n         </div>\n         <div class=\"row center gap-small create-button space\">\n             <div class=\"col center\">\n                 <h3>Start</h3>\n+                <img src=\"assests/star.svg\" alt=\"\">\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656881540686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n-            <div class=\"col center\">\n+            <!-- <div class=\"col center\"> -->\n                 <h3>Start</h3>\n-                <img src=\"assests/star.svg\" alt=\"\">\n+                <img src=\"assets/star.svg\" alt=\"\">\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656881553831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,10 @@\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n-            <!-- <div class=\"col center\"> -->\n+            <div class=\"col center\">\n                 <h3>Start</h3>\n-                <img src=\"assets/star.svg\" alt=\"\">\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656882007237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n-                <app-users-list [participants]=\"participants\"></app-users-list>\n+                <app-users-list [participants]=\"participants\" [host]=\"host_uid\"></app-users-list>\n             </div>\n         </div>\n         \n     </div>\n"
+                },
+                {
+                    "date": 1656882084730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n-                <app-users-list [participants]=\"participants\" [host]=\"host_uid\"></app-users-list>\n+                <app-users-list [participants]=\"participants\" [host]=\"hostUid\"></app-users-list>\n             </div>\n         </div>\n         \n     </div>\n"
+                },
+                {
+                    "date": 1656882098447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n-                <app-users-list [participants]=\"participants\" [host]=\"hostUid\"></app-users-list>\n+                <app-users-list [participants]=\"participants\" [host]=\"host\"></app-users-list>\n             </div>\n         </div>\n         \n     </div>\n"
+                },
+                {
+                    "date": 1656882168904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n             <div class=\"col center\">\n-                <h3>Start</h3>\n+                <h3>Join</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656882202013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n             </div>\n         </div>\n         <div class=\"row center gap-small create-button space\">\n             <div class=\"col center\">\n-                <h3>Join</h3>\n+                <h3>{{buttonText}}</h3>\n             </div>\n         </div>\n         <div class=\"row space\">\n             <div class=\"col users-list\">\n"
+                },
+                {
+                    "date": 1656883462598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n             <div class=\"col center\">\n                 <input type=\"text\" [(ngModel)]=\"username\" (keydown)=\"onEnter($event)\" (focusout)=\"updateUsername()\">\n             </div>\n         </div>\n-        <div class=\"row center gap-small create-button space\">\n+        <div class=\"row center gap-small create-button space\" (click)=\"onClick()\"\">\n             <div class=\"col center\">\n                 <h3>{{buttonText}}</h3>\n             </div>\n         </div>\n"
                 }
             ],
             "date": 1656720690001,

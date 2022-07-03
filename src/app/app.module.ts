@@ -15,6 +15,7 @@ import { SessionComponent } from './session/session.component';
 import { FormsModule } from '@angular/forms';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserTabComponent } from './user-tab/user-tab.component';
+import { SubmitComponent } from './submit/submit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserTabComponent } from './user-tab/user-tab.component';
     HomeComponent,
     SessionComponent,
     UsersListComponent,
-    UserTabComponent
+    UserTabComponent,
+    SubmitComponent
   ],
   imports: [
     BrowserModule,

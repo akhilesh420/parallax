@@ -5,10 +5,13 @@
         </div>
     </div>
     <div class="col grow-user">
-        <h4>Akhilesh Sharma Rajesh</h4>
+        <h4>{{username}}</h4>
     </div>
     <div class="col">
-        <div class="status">
+        <!-- <div class="status">
+        </div> -->
+        <div *ngIf="host === uid"  class="icon">
+            <img src="assets/icons/star.svg" alt="">
         </div>
     </div>
 </div>

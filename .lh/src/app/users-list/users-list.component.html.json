@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1656807581898,
@@ -72,6 +72,14 @@
                 {
                     "date": 1656811255925,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab *ngFor=\"let participant of participants\"></app-user-tab>\n+        <app-user-tab [uid]=\"participant.uid\" *ngFor=\"let participant of participants\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656881940810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab [uid]=\"participant.uid\" *ngFor=\"let participant of participants\"></app-user-tab>\n+        <app-user-tab [uid]=\"participant.uid\" [host]=\"\" *ngFor=\"let participant of participants\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656882007232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab [uid]=\"participant.uid\" [host]=\"\" *ngFor=\"let participant of participants\"></app-user-tab>\n+        <app-user-tab [uid]=\"participant.uid\" [host]=\"host\" *ngFor=\"let participant of participants\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1656807581898,

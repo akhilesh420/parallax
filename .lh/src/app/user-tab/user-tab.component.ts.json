@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1656811255908,
@@ -16,6 +16,22 @@
                 {
                     "date": 1656811277848,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n \n   constructor() { }\n \n   ngOnInit(): void {\n-    console.log(uid);\n+    console.log(this.uid);\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656881013159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,29 @@\n-import { Component, Input, OnInit } from '@angular/core';\n+import { takeUntil, Subject } from 'rxjs';\n+import { FirebaseService } from './../services/firebase.service';\n+import { Component, Input, OnInit, OnDestroy } from '@angular/core';\n \n @Component({\n   selector: 'app-user-tab',\n   templateUrl: './user-tab.component.html',\n   styleUrls: ['./user-tab.component.css']\n })\n-export class UserTabComponent implements OnInit {\n+export class UserTabComponent implements OnInit, OnDestroy {\n \n-  @Input() uid: string | null= null;\n+  @Input() uid: string | null = null;\n+  $notifier: Subject<null> = new Subject();\n \n-  constructor() { }\n+  constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n-    console.log(this.uid);\n+    if (!this.uid) return;\n+    this.firebaseService.getUserInformation(this.uid)\n+    .pipe(takeUntil(this.$notifier))\n+    .subscribe(() => {});\n   }\n \n+  ngOnDestroy(): void {\n+    this.$notifier.next(null);\n+    this.$notifier.complete();\n+  }\n+\n }\n"
+                },
+                {
+                    "date": 1656881073880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { takeUntil, Subject } from 'rxjs';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, Input, OnInit, OnDestroy } from '@angular/core';\n+import { User } from '../models/firestore.model';\n \n @Component({\n   selector: 'app-user-tab',\n   templateUrl: './user-tab.component.html',\n@@ -10,16 +11,19 @@\n export class UserTabComponent implements OnInit, OnDestroy {\n \n   @Input() uid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n+  username: string = '';\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n     if (!this.uid) return;\n     this.firebaseService.getUserInformation(this.uid)\n     .pipe(takeUntil(this.$notifier))\n-    .subscribe(() => {});\n+    .subscribe((user: User | undefined) => {\n+      if (user) this.username = user.username;\n+    });\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656881940824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n })\n export class UserTabComponent implements OnInit, OnDestroy {\n \n   @Input() uid: string | null = null;\n+  @Input() host: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   username: string = '';\n \n   constructor(private firebaseService: FirebaseService) { }\n"
+                },
+                {
+                    "date": 1656882765402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n })\n export class UserTabComponent implements OnInit, OnDestroy {\n \n   @Input() uid: string | null = null;\n-  @Input() host: string | null = null;\n+  @Input() host: string | undefined = undefined;\n   $notifier: Subject<null> = new Subject();\n   username: string = '';\n \n   constructor(private firebaseService: FirebaseService) { }\n"
                 }
             ],
             "date": 1656811255908,

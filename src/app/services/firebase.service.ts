@@ -3,7 +3,7 @@ import { Participant, Session, User } from './../models/firestore.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, Observable, take } from 'rxjs'
+import { BehaviorSubject, map, Observable, take } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -67,10 +67,11 @@ export class FirebaseService {
     return this.firestore.collection('sessions').doc<Session>(sid).valueChanges()
   }
 
-  getParticipants(sid: string): Observable<Participant[]>  {
-    return this.firestore.collection('sessions').doc(sid).collection<Participant>('participants').valueChanges()
+  getParticipants(sid: string): Observable<Participant[]> {
+    return this.firestore.collection('sessions').doc(sid)
+      .collection<Participant>('participants', ref => ref.orderBy("sessionStartTimestamp")).valueChanges()
   }
-  
+
 
   addUserToSession(sid: string): Promise<any> | undefined {
     const uid = this.getUserUid();
@@ -98,9 +99,7 @@ export class FirebaseService {
           } else {
             unum = userDoc.data()?.['userNumber'];
           }
-
-          const isHost = uid === sessionDoc.data()?.['host_uid'];
-          return { isHost: isHost, unum: unum, session: sessionDoc.data() };
+          return { unum: unum };
         });
       });
 

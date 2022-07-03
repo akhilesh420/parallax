@@ -10,7 +10,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 export class UsersListComponent implements OnInit {
 
   @Input() participants: Participant[] = [];
-
+  @Input() host: string | undefined = undefined;
 
   constructor(private firebaseService: FirebaseService) { }
 
