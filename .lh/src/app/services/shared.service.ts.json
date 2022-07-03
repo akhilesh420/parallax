@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/services/shared.service.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1656721292857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656721317192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,12 +5,14 @@\n   providedIn: 'root'\n })\n export class SharedService {\n \n-  private progress: BehaviorSubject<boolean> = new BehaviorSubject(false);\n+  private progress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);\n \n   constructor() { }\n \n+\n+  // Progress bar\n   startProgress(): void {\n     this.progress.next(true);\n   }\n \n"
+                }
+            ],
+            "date": 1656721292857,
+            "name": "Commit-0",
+            "content": "import { BehaviorSubject } from 'rxjs';\nimport { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class SharedService {\n\n  private progress: BehaviorSubject<boolean> = new BehaviorSubject(false);\n\n  constructor() { }\n\n  startProgress(): void {\n    this.progress.next(true);\n  }\n\n  endProgress(): void {\n    this.progress.next(false);\n  }\n\n  getProgress(): BehaviorSubject<boolean> {\n    return this.progress;\n  }\n}\n"
+        }
+    ]
+}

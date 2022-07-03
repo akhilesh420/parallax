@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/app.component.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1656721863161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1656721863161,
+            "name": "Commit-0",
+            "content": "/* Progress bar*/\r\n.progress {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    height: 6px;\r\n    background-color: var(--secondary);\r\n    -webkit-animation: bubble 5.0s forwards;\r\n    /* for less modern browsers */\r\n    animation: bubble 5.0s forwards;\r\n    animation-name: progress;\r\n}\r\n\r\n@keyframes progress {\r\n    from {\r\n        width: 0%;\r\n    }\r\n\r\n    to {\r\n        width: 100%;\r\n    }\r\n}"
+        }
+    ]
+}

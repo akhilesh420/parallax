@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/app/users-list/users-list.component.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1656807581898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656807605372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n \n <div class=\"row\">\n-    <div class=\"col\"></div>\n+    <div class=\"col\">\n+        \n+    </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807646270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row\">\n-    <div class=\"col\">\n-        \n+    <div class=\"col container\">\n+\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807693013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n-<div class=\"row\">\n+<div class=\"row main\">\n     <div class=\"col container\">\n \n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808232755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,10 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-\n+        <div class=\"row\">\n+            <div class=\"col conatainer\">\n+                <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n+            </div>\n+        </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808263570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,11 @@\n <div class=\"row main\">\n     <div class=\"col container\">\n         <div class=\"row\">\n             <div class=\"col conatainer\">\n-                <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n+                <div class=\"dp\">\n+                    <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n+                </div>\n             </div>\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808348845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n         <div class=\"row\">\n-            <div class=\"col conatainer\">\n+            <div class=\"col container\">\n                 <div class=\"dp\">\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n             </div>\n"
+                },
+                {
+                    "date": 1656808422685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,10 @@\n                 <div class=\"dp\">\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n             </div>\n+            <div class=\"col\">\n+                <h3>Akhilesh</h3>\n+            </div>\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808428370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n             </div>\n             <div class=\"col\">\n-                <h3>Akhilesh</h3>\n+                <h4>Akhilesh</h4>\n             </div>\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808579752,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <div class=\"row\">\n+        <div class=\"row user-tab\">\n             <div class=\"col container\">\n                 <div class=\"dp\">\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n"
+                },
+                {
+                    "date": 1656808595642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n         <div class=\"row user-tab\">\n-            <div class=\"col container\">\n+            <div class=\"col \">\n                 <div class=\"dp\">\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n             </div>\n"
+                },
+                {
+                    "date": 1656808759662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n         <div class=\"row user-tab\">\n-            <div class=\"col \">\n+            <div class=\"col grow-dp\">\n                 <div class=\"dp\">\n                     <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n                 </div>\n             </div>\n-            <div class=\"col\">\n+            <div class=\"col grow-user\">\n                 <h4>Akhilesh</h4>\n             </div>\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1656808839026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,12 @@\n             </div>\n             <div class=\"col grow-user\">\n                 <h4>Akhilesh</h4>\n             </div>\n+            <div class=\"col grow-status\">\n+                <div class=\"dp\">\n+                    <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n+                </div>\n+            </div>\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808907539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <div class=\"row user-tab\">\n-            <div class=\"col grow-dp\">\n-                <div class=\"dp\">\n-                    <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n-                </div>\n-            </div>\n-            <div class=\"col grow-user\">\n-                <h4>Akhilesh</h4>\n-            </div>\n-            <div class=\"col grow-status\">\n-                <div class=\"dp\">\n-                    <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n-                </div>\n-            </div>\n-        </div>\n+        <app-user-tab></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809185210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab></app-user-tab>\n+        <app-user-tab *ngFor=\"let user of users\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810915599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab *ngFor=\"let user of users\"></app-user-tab>\n+        <app-user-tab *ngFor=\"let participant of participants\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656811255925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n <div class=\"row main\">\n     <div class=\"col container\">\n-        <app-user-tab *ngFor=\"let participant of participants\"></app-user-tab>\n+        <app-user-tab [uid]=\"participant.uid\" *ngFor=\"let participant of participants\"></app-user-tab>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1656807581898,
+            "name": "Commit-0",
+            "content": "\n<div class=\"row\">\n    <div class=\"col\"></div>\n</div>"
+        }
+    ]
+}

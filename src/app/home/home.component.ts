@@ -18,12 +18,9 @@ export class HomeComponent implements OnInit {
   }
 
   createSession() {
-    const user_uid = this.firebaseService.getUserUid();
-    if (user_uid) {
-      this.firebaseService.createSession()
+    this.firebaseService.createSession()
         .then(sid => this.router.navigate([`session/${sid}`]))
         .catch(error => console.log(error));
-    }
   }
 
 }

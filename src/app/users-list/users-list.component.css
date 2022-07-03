@@ -1,0 +1,14 @@
+.main {
+    border: 2px solid var(--secondary);
+    height: 200px;
+    border-radius: 8px;
+    border-top: 24px solid var(--secondary); 
+    padding: 10px 8px;
+    overflow-y: auto;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    row-gap: 10px;
+}

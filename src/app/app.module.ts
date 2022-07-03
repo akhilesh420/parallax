@@ -12,15 +12,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SessionComponent } from './session/session.component';
+import { FormsModule } from '@angular/forms';
+import { UsersListComponent } from './users-list/users-list.component';
+import { UserTabComponent } from './user-tab/user-tab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SessionComponent
+    SessionComponent,
+    UsersListComponent,
+    UserTabComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,

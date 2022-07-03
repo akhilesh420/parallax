@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/app/users-list/users-list.component.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1656809185195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656810668231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,20 @@\n+import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n+import { User } from '../models/firestore.model';\n \n @Component({\n   selector: 'app-users-list',\n   templateUrl: './users-list.component.html',\n   styleUrls: ['./users-list.component.css']\n })\n export class UsersListComponent implements OnInit {\n \n-  users: number[] = [0,0,0,0,0,0,0,0,0,0,0];\n+  users: User[] = [];\n \n-  constructor() { }\n+  constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n+    this.firebaseService.\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656810881418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,21 @@\n+import { Participants } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n-import { Component, OnInit } from '@angular/core';\n-import { User } from '../models/firestore.model';\n+import { Component, OnInit, OnDestroy, Input } from '@angular/core';\n \n @Component({\n   selector: 'app-users-list',\n   templateUrl: './users-list.component.html',\n   styleUrls: ['./users-list.component.css']\n })\n export class UsersListComponent implements OnInit {\n \n-  users: User[] = [];\n+  @Input() participants: Participants[] = [];\n \n+\n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n-    this.firebaseService.\n+\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656811024060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Participants } from './../models/firestore.model';\n+import { Participant } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit, OnDestroy, Input } from '@angular/core';\n \n @Component({\n@@ -8,9 +8,9 @@\n   styleUrls: ['./users-list.component.css']\n })\n export class UsersListComponent implements OnInit {\n \n-  @Input() participants: Participants[] = [];\n+  @Input() participants: Participant[] = [];\n \n \n   constructor(private firebaseService: FirebaseService) { }\n \n"
+                },
+                {
+                    "date": 1656811292023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n+    console.log(this.participants)\n \n   }\n \n }\n"
+                },
+                {
+                    "date": 1656811330031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,11 @@\n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n     console.log(this.participants)\n+  }\n \n+  ngOnChanges() {\n+    console.log(this.participants)\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656880645861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,10 @@\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n-    console.log(this.participants)\n   }\n \n   ngOnChanges() {\n-    console.log(this.participants)\n   }\n \n }\n"
+                }
+            ],
+            "date": 1656809185195,
+            "name": "Commit-0",
+            "content": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-users-list',\n  templateUrl: './users-list.component.html',\n  styleUrls: ['./users-list.component.css']\n})\nexport class UsersListComponent implements OnInit {\n\n  users: number[] = [0,0,0,0,0,0,0,0,0,0,0];\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n"
+        }
+    ]
+}

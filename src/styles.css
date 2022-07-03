@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Updock&display=swap');
+
+:root {
+  --primary: #D08873;
+  --secondary: #4D415E;
+  --reject: #E7676C;
+  --accept: #83C0AF;
+  --background: #EEDBCD;
+}
+
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,7 +18,7 @@ html {
 }
 
 body {
-  background-color: #EEDBCD;
+  background-color: var(--background);
   height: 100%;
   width: 100%;
   padding: 0;
@@ -53,7 +63,11 @@ h1 {
   text-align: center;
 }
 
-input {
+.pointer {
+  cursor: pointer;
+}
+
+.img-input {
   display: none;
 }
 
@@ -62,7 +76,7 @@ input {
   height: 64px;
   border: 2px solid black;
   border-radius: 50%;
-  background-color: #D08873;
+  background-color: var(--primary);
   cursor: pointer;
 }
 
@@ -89,11 +103,11 @@ input {
 }
 
 .accept {
-  background-color: #83C0AF;
+  background-color: var(--accept);
 }
 
 .reject {
-  background-color: #E7676C;
+  background-color: var(--primary);
 }
 
 .gap {
@@ -132,32 +146,35 @@ h3 {
   margin: 0;
 }
 
-.create-session {
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: var(--secondary);
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+}
+
+
+.create-button {
   border: 2px solid black;
   border-radius: 12px;
-  background-color: #83C0AF;
+  background-color: var(--accept);
   cursor: pointer;
   padding: 5px;
 }
 
-/* Progress bar*/
-.progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 6px;
-  background-color: #4D415E;
-  -webkit-animation: bubble 5.0s forwards; /* for less modern browsers */
-        animation: bubble 5.0s forwards;
-  animation-name: progress;
+input {
+  border: 2px solid black;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-@keyframes progress {
-  from {
-    width: 0%;
-  }
-
-  to {
-    width: 100%;
-  }
+input:focus {
+  outline: none;
+  border: 2px solid var(--secondary);
 }

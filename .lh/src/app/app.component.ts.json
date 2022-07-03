@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1656638120144,
@@ -28,6 +28,10 @@
                 {
                     "date": 1656716652848,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,8 @@\n \n   constructor(private firebaseService: FirebaseService) {}\n \n   ngOnInit() {\n-    this.firebaseService.signIn();\n+    // Sign in to firebase\n+    this.firebaseService.signIn(); \n   }\n }\n"
+                },
+                {
+                    "date": 1656721449717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,29 @@\n+import { SharedService } from './services/shared.service';\n import { FirebaseService } from './services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n+import { BehaviorSubject } from 'rxjs';\n \n @Component({\n   selector: 'app-root',\n   templateUrl: './app.component.html',\n   styleUrls: ['./app.component.css']\n })\n export class AppComponent implements OnInit {\n   title = 'parallax';\n-  version = '1.0.0'\n+  version = '1.0.0';\n \n-  constructor(private firebaseService: FirebaseService) {}\n+  progress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);\n \n+  constructor(\n+    private firebaseService: FirebaseService,\n+    private sharedService: SharedService\n+  ) { }\n+\n   ngOnInit() {\n     // Sign in to firebase\n-    this.firebaseService.signIn(); \n+    this.firebaseService.signIn();\n+\n+    // Toggle progress bar\n+    this.progress = this.sharedService.getProgress();\n   }\n }\n"
                 }
             ],
             "date": 1656638120144,

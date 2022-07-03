@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1656713334311,
@@ -24,6 +24,10 @@
                 {
                     "date": 1656715251102,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n // Firebase\n import { AngularFireModule } from '@angular/fire/compat';\n import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';\n import { AngularFirestoreModule } from '@angular/fire/compat/firestore';\n-import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';\n+import { PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n@@ -24,10 +24,10 @@\n     AngularFireAnalyticsModule,\n     AngularFirestoreModule\n   ],\n   providers: [\n-    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },\n-    { provide: USE_DEVICE_LANGUAGE, useValue: true }\n+    { provide: USE_DEVICE_LANGUAGE, useValue: true },\n+    { provide: PERSISTENCE, useValue: 'local' },\n   ],\n   bootstrap: [AppComponent]\n })\n export class AppModule { }\n"
+                },
+                {
+                    "date": 1656739724137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,16 +10,20 @@\n \n import { AppRoutingModule } from './app-routing.module';\n import { AppComponent } from './app.component';\n import { HomeComponent } from './home/home.component';\n+import { SessionComponent } from './session/session.component';\n+import { FormsModule } from '@angular/forms';\n \n @NgModule({\n   declarations: [\n     AppComponent,\n-    HomeComponent\n+    HomeComponent,\n+    SessionComponent\n   ],\n   imports: [\n     BrowserModule,\n+    FormsModule,\n     AppRoutingModule,\n     AngularFireModule.initializeApp(environment.firebase),\n     AngularFireAnalyticsModule,\n     AngularFirestoreModule\n"
                 }
             ],
             "date": 1656713334311,

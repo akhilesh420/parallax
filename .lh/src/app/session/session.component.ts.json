@@ -1,0 +1,154 @@
+{
+    "sourceFile": "src/app/session/session.component.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 34,
+            "patches": [
+                {
+                    "date": 1656723847402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656723873144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,7 @@\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n-    this.firebaseService.\n+    this.username = this.firebaseService.getUserUsername();\n   }\n }\n"
+                },
+                {
+                    "date": 1656724022206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,8 @@\n \n   constructor(private firebaseService: FirebaseService) { }\n \n   ngOnInit(): void {\n+    \n     this.username = this.firebaseService.getUserUsername();\n   }\n }\n"
+                },
+                {
+                    "date": 1656724444718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,36 @@\n import { FirebaseService } from './../services/firebase.service';\n-import { Component, OnInit } from '@angular/core';\n+import { Component, OnDestroy, OnInit } from '@angular/core';\n+import { ActivatedRoute, Params } from '@angular/router';\n+import { Subject, takeUntil } from 'rxjs';\n+import { Session } from '../models/firestore.model';\n \n @Component({\n   selector: 'app-session',\n   templateUrl: './session.component.html',\n   styleUrls: ['./session.component.css']\n })\n-export class SessionComponent implements OnInit {\n+export class SessionComponent implements OnInit, OnDestroy {\n \n   username: string | null = null;\n+  sid: string | null = null;\n+  $notifier: Subject<null> = new Subject();\n+  currentSession: Session | undefined;\n \n-  constructor(private firebaseService: FirebaseService) { }\n+  constructor(private firebaseService: FirebaseService,\n+    private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n-    \n+    this.sid = this.route.snapshot.paramMap.get('sid');\n+    if (this.sid) {\n+      this.firebaseService.getSession(this.sid)\n+        .pipe(takeUntil(this.$notifier))\n+        .subscribe(session => this.currentSession = session);\n+    }\n     this.username = this.firebaseService.getUserUsername();\n   }\n+\n+  ngOnDestroy(): void {\n+    this.$notifier.next(null);\n+    this.$notifier.complete();\n+  }\n }\n"
+                },
+                {
+                    "date": 1656726292867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n \n   ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n     if (this.sid) {\n+      this.firebaseService.addUserToSession(this.sid);\n       this.firebaseService.getSession(this.sid)\n         .pipe(takeUntil(this.$notifier))\n         .subscribe(session => this.currentSession = session);\n     }\n"
+                },
+                {
+                    "date": 1656726570389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,21 +14,19 @@\n   username: string | null = null;\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n+  isHost: boolean = false;\n+  unum: number = 0;\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n-  ngOnInit(): void {\n+    async ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n     if (this.sid) {\n-      this.firebaseService.addUserToSession(this.sid);\n-      this.firebaseService.getSession(this.sid)\n-        .pipe(takeUntil(this.$notifier))\n-        .subscribe(session => this.currentSession = session);\n-    }\n-    this.username = this.firebaseService.getUserUsername();\n+      [this.isHost, this.unum, this.currentSession] = await this.firebaseService.addUserToSession(this.sid);\n+      this.username = this.firebaseService.getUserUsername();\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656726760109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,17 @@\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n-    async ngOnInit(): void {\n+  ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n     if (this.sid) {\n-      [this.isHost, this.unum, this.currentSession] = await this.firebaseService.addUserToSession(this.sid);\n+      this.firebaseService.addUserToSession(this.sid)\n+      ?.then((response) => {\n+        this.isHost =  response.isHost;\n+        this.unum =  response.unum;\n+        this.currentSession =  response.session;\n+        )\n       this.username = this.firebaseService.getUserUsername();\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656726775789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n       ?.then((response) => {\n         this.isHost =  response.isHost;\n         this.unum =  response.unum;\n         this.currentSession =  response.session;\n+        console.log(response);\n         )\n       this.username = this.firebaseService.getUserUsername();\n   }\n \n"
+                },
+                {
+                    "date": 1656726814298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,15 +24,16 @@\n   ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n     if (this.sid) {\n       this.firebaseService.addUserToSession(this.sid)\n-      ?.then((response) => {\n-        this.isHost =  response.isHost;\n-        this.unum =  response.unum;\n-        this.currentSession =  response.session;\n-        console.log(response);\n-        )\n+        ?.then((response) => {\n+          this.isHost = response.isHost;\n+          this.unum = response.unum;\n+          this.currentSession = response.session;\n+          console.log(response);\n+        });\n       this.username = this.firebaseService.getUserUsername();\n+    }\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656738991980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n           this.unum = response.unum;\n           this.currentSession = response.session;\n           console.log(response);\n         });\n-      this.username = this.firebaseService.getUserUsername();\n+      this.username = this.firebaseService.getUserInformation();\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656739498526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n+import { User } from 'firebase/auth';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnDestroy, OnInit } from '@angular/core';\n import { ActivatedRoute, Params } from '@angular/router';\n-import { Subject, takeUntil } from 'rxjs';\n+import { Subject, takeUntil, Observable } from 'rxjs';\n import { Session } from '../models/firestore.model';\n \n @Component({\n   selector: 'app-session',\n@@ -10,9 +11,9 @@\n   styleUrls: ['./session.component.css']\n })\n export class SessionComponent implements OnInit, OnDestroy {\n \n-  username: string | null = null;\n+  user: Observable<unknown> | null = null;\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   isHost: boolean = false;\n@@ -30,9 +31,9 @@\n           this.unum = response.unum;\n           this.currentSession = response.session;\n           console.log(response);\n         });\n-      this.username = this.firebaseService.getUserInformation();\n+      this.user = this.firebaseService.getMyInformation();\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656739606608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   styleUrls: ['./session.component.css']\n })\n export class SessionComponent implements OnInit, OnDestroy {\n \n-  user: Observable<unknown> | null = null;\n+  user: Observable<User | undefined> | null = null;\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   isHost: boolean = false;\n"
+                },
+                {
+                    "date": 1656740094522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,18 @@\n-import { User } from 'firebase/auth';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnDestroy, OnInit } from '@angular/core';\n import { ActivatedRoute, Params } from '@angular/router';\n import { Subject, takeUntil, Observable } from 'rxjs';\n-import { Session } from '../models/firestore.model';\n+import { Session, User } from '../models/firestore.model';\n \n @Component({\n   selector: 'app-session',\n   templateUrl: './session.component.html',\n   styleUrls: ['./session.component.css']\n })\n export class SessionComponent implements OnInit, OnDestroy {\n \n-  user: Observable<User | undefined> | null = null;\n+  username: string = '';\n   sid: string | null = null;\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   isHost: boolean = false;\n@@ -23,17 +22,23 @@\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n-    if (this.sid) {\n-      this.firebaseService.addUserToSession(this.sid)\n-        ?.then((response) => {\n-          this.isHost = response.isHost;\n-          this.unum = response.unum;\n-          this.currentSession = response.session;\n-          console.log(response);\n+    if (!this.sid) return\n+    this.firebaseService.addUserToSession(this.sid)\n+      ?.then((response) => {\n+        this.isHost = response.isHost;\n+        this.unum = response.unum;\n+        this.currentSession = response.session;\n+        console.log(response);\n+      });\n+    const information = this.firebaseService.getMyInformation();\n+    if (information) {\n+      information\n+        .pipe(takeUntil(this.$notifier))\n+        .subscribe((user: User) => {\n+          if (user) this.username = user.username;\n         });\n-      this.user = this.firebaseService.getMyInformation();\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656740109390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     const information = this.firebaseService.getMyInformation();\n     if (information) {\n       information\n         .pipe(takeUntil(this.$notifier))\n-        .subscribe((user: User) => {\n+        .subscribe((user: User | undefined) => {\n           if (user) this.username = user.username;\n         });\n     }\n   }\n"
+                },
+                {
+                    "date": 1656751568079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,15 @@\n         });\n     }\n   }\n \n+  updateUsername(event: any) {\n+    if (event.keyCode === 13) {\n+      alert('you just pressed the enter key', typeof(event));\n+      // rest of your code\n+    }\n+  }\n+\n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n     this.$notifier.complete();\n   }\n"
+                },
+                {
+                    "date": 1656751605230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n   }\n \n   updateUsername(event: any) {\n     if (event.keyCode === 13) {\n-      alert('you just pressed the enter key', typeof(event));\n+      alert(`you just pressed the enter key, ${typeof event}`);\n       // rest of your code\n     }\n   }\n \n"
+                },
+                {
+                    "date": 1656751648216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,10 +42,10 @@\n   }\n \n   updateUsername(event: any) {\n     if (event.keyCode === 13) {\n-      alert(`you just pressed the enter key, ${typeof event}`);\n-      // rest of your code\n+      console.log(`you just pressed the enter key, ${typeof event}`)\n+      console.log(event)\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656751684820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,10 +40,10 @@\n         });\n     }\n   }\n \n-  updateUsername(event: any) {\n-    if (event.keyCode === 13) {\n+  updateUsername(event: KeyboardEvent) {\n+    if (event.key === 'enter') {\n       console.log(`you just pressed the enter key, ${typeof event}`)\n       console.log(event)\n     }\n   }\n"
+                },
+                {
+                    "date": 1656751800244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     }\n   }\n \n   updateUsername(event: KeyboardEvent) {\n-    if (event.key === 'enter') {\n+    if (event.key === 'Enter') {\n       console.log(`you just pressed the enter key, ${typeof event}`)\n       console.log(event)\n     }\n   }\n"
+                },
+                {
+                    "date": 1656751970418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,12 +40,15 @@\n         });\n     }\n   }\n \n-  updateUsername(event: KeyboardEvent) {\n+  updateUsername() {\n+    this.firebaseService.updateUsername(this.username);\n+  }\n+\n+  onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') {\n-      console.log(`you just pressed the enter key, ${typeof event}`)\n-      console.log(event)\n+      \n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656751980773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n   }\n \n   onEnter(event: KeyboardEvent) {\n     if (event.key === 'Enter') {\n-      \n+      this.updateUsername();\n     }\n   }\n \n   ngOnDestroy(): void {\n"
+                },
+                {
+                    "date": 1656751986312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,9 @@\n     this.firebaseService.updateUsername(this.username);\n   }\n \n   onEnter(event: KeyboardEvent) {\n-    if (event.key === 'Enter') {\n-      this.updateUsername();\n-    }\n+    if (event.key === 'Enter') this.updateUsername();\n   }\n \n   ngOnDestroy(): void {\n     this.$notifier.next(null);\n"
+                },
+                {
+                    "date": 1656752019713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n       information\n         .pipe(takeUntil(this.$notifier))\n         .subscribe((user: User | undefined) => {\n           if (user) this.username = user.username;\n+          console.log(this.username);\n         });\n     }\n   }\n \n"
+                },
+                {
+                    "date": 1656806761341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,8 @@\n       ?.then((response) => {\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n-        console.log(response);\n       });\n     const information = this.firebaseService.getMyInformation();\n     if (information) {\n       information\n"
+                },
+                {
+                    "date": 1656806836007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,11 @@\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n     this.sid = this.route.snapshot.paramMap.get('sid');\n+    this.route.paramMap.subscribe(paramMap => {\n+      this.sid = paramMap.get('sid');\n+    })\n     if (!this.sid) return\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n         this.isHost = response.isHost;\n"
+                },
+                {
+                    "date": 1656806853425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n     this.route.paramMap.subscribe(paramMap => {\n       this.sid = paramMap.get('sid');\n     })\n     if (!this.sid) return\n+    \n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656806925068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,14 +21,16 @@\n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n-    this.sid = this.route.snapshot.paramMap.get('sid');\n     this.route.paramMap.subscribe(paramMap => {\n       this.sid = paramMap.get('sid');\n+      this.setUpSession();\n     })\n-    if (!this.sid) return\n-    \n+  }\n+\n+  setUpSession() {\n+    if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656806943060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n   }\n \n   setUpSession() {\n     if (!this.sid) return;\n+    console.log(this.sid);\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656806992860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,17 @@\n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n+    const information = this.firebaseService.getMyInformation();\n+    if (information) {\n+      information\n+        .pipe(takeUntil(this.$notifier))\n+        .subscribe((user: User | undefined) => {\n+          if (user) this.username = user.username;\n+          console.log(this.username);\n+        });\n+      }\n     this.route.paramMap.subscribe(paramMap => {\n       this.sid = paramMap.get('sid');\n       this.setUpSession();\n     })\n@@ -36,17 +45,8 @@\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n       });\n-    const information = this.firebaseService.getMyInformation();\n-    if (information) {\n-      information\n-        .pipe(takeUntil(this.$notifier))\n-        .subscribe((user: User | undefined) => {\n-          if (user) this.username = user.username;\n-          console.log(this.username);\n-        });\n-    }\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                },
+                {
+                    "date": 1656807000559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,8 @@\n   }\n \n   setUpSession() {\n     if (!this.sid) return;\n-    console.log(this.sid);\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n"
+                },
+                {
+                    "date": 1656807014927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \n   ngOnInit(): void {\n     const information = this.firebaseService.getMyInformation();\n     if (information) {\n+      console.log(information);\n       information\n         .pipe(takeUntil(this.$notifier))\n         .subscribe((user: User | undefined) => {\n           if (user) this.username = user.username;\n"
+                },
+                {
+                    "date": 1656807309821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,24 +21,32 @@\n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n   ngOnInit(): void {\n-    const information = this.firebaseService.getMyInformation();\n-    if (information) {\n-      console.log(information);\n-      information\n-        .pipe(takeUntil(this.$notifier))\n-        .subscribe((user: User | undefined) => {\n-          if (user) this.username = user.username;\n-          console.log(this.username);\n-        });\n-      }\n+    this.setUpUser();\n     this.route.paramMap.subscribe(paramMap => {\n       this.sid = paramMap.get('sid');\n       this.setUpSession();\n     })\n   }\n \n+  setUpUser() {\n+    this.firebaseService.isSignedIn()\n+      .pipe(takeUntil(this.$notifier))\n+      .subscribe((uid) => {\n+        if (!uid) return;\n+        const information = this.firebaseService.getUserInformation(uid);\n+        if (!information) return\n+        console.log(information);\n+        information\n+          .pipe(takeUntil(this.$notifier))\n+          .subscribe((user: User | undefined) => {\n+            if (user) this.username = user.username;\n+            console.log(this.username);\n+          });\n+      })\n+  }\n+\n   setUpSession() {\n     if (!this.sid) return;\n     this.firebaseService.addUserToSession(this.sid)\n       ?.then((response) => {\n"
+                },
+                {
+                    "date": 1656810891428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { Participants } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnDestroy, OnInit } from '@angular/core';\n import { ActivatedRoute, Params } from '@angular/router';\n import { Subject, takeUntil, Observable } from 'rxjs';\n@@ -16,8 +17,9 @@\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   isHost: boolean = false;\n   unum: number = 0;\n+  participants: Participants[] = [];\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n@@ -53,8 +55,12 @@\n         this.isHost = response.isHost;\n         this.unum = response.unum;\n         this.currentSession = response.session;\n       });\n+\n+    this.firebaseService.getParticipants(this.sid)\n+      .pipe(takeUntil(this.$notifier))\n+      .subscribe()\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                },
+                {
+                    "date": 1656811024075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Participants } from './../models/firestore.model';\n+import { Participant } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnDestroy, OnInit } from '@angular/core';\n import { ActivatedRoute, Params } from '@angular/router';\n import { Subject, takeUntil, Observable } from 'rxjs';\n@@ -17,9 +17,9 @@\n   $notifier: Subject<null> = new Subject();\n   currentSession: Session | undefined;\n   isHost: boolean = false;\n   unum: number = 0;\n-  participants: Participants[] = [];\n+  participants: Participant[] = [];\n \n   constructor(private firebaseService: FirebaseService,\n     private route: ActivatedRoute) { }\n \n@@ -37,14 +37,12 @@\n       .subscribe((uid) => {\n         if (!uid) return;\n         const information = this.firebaseService.getUserInformation(uid);\n         if (!information) return\n-        console.log(information);\n         information\n           .pipe(takeUntil(this.$notifier))\n           .subscribe((user: User | undefined) => {\n             if (user) this.username = user.username;\n-            console.log(this.username);\n           });\n       })\n   }\n \n"
+                },
+                {
+                    "date": 1656811367868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       });\n \n     this.firebaseService.getParticipants(this.sid)\n       .pipe(takeUntil(this.$notifier))\n-      .subscribe()\n+      .subscribe(participants =>  this.participants = participants);\n   }\n \n   updateUsername() {\n     this.firebaseService.updateUsername(this.username);\n"
+                }
+            ],
+            "date": 1656723847402,
+            "name": "Commit-0",
+            "content": "import { FirebaseService } from './../services/firebase.service';\nimport { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-session',\n  templateUrl: './session.component.html',\n  styleUrls: ['./session.component.css']\n})\nexport class SessionComponent implements OnInit {\n\n  username: string | null = null;\n\n  constructor(private firebaseService: FirebaseService) { }\n\n  ngOnInit(): void {\n    this.firebaseService.\n  }\n}\n"
+        }
+    ]
+}

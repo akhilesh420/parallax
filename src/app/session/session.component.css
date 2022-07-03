@@ -1,0 +1,29 @@
+.dp {
+    height: 60px;
+    width: 60px;
+    border: 2px solid var(--secondary);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.dp>img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.gap {
+    column-gap: 12px;
+}
+
+.space {
+    margin-top: 12px;
+}
+
+.users-list {
+    width: 100%;
+    max-width: 258px;
+}

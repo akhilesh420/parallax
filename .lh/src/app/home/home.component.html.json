@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1656712695787,
@@ -16,6 +16,10 @@
                 {
                     "date": 1656717083847,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <div class=\"row center gap-small create-session\">\n     <div class=\"col center\">\n-        <div class=\"row\">\n+        <div class=\"row\" (click)=\"createSession()\">\n             <h3>create session</h3>\n         </div>\n     </div>\n </div>\n"
+                },
+                {
+                    "date": 1656721902138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<div class=\"row center gap-small create-session\">\n+<div class=\"row center gap-small create-button\">\n     <div class=\"col center\">\n         <div class=\"row\" (click)=\"createSession()\">\n             <h3>create session</h3>\n         </div>\n"
                 }
             ],
             "date": 1656712695787,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1656717028726,
@@ -16,6 +16,34 @@
                 {
                     "date": 1656719669190,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n export class Session {\r\n     constructor(\r\n-        host_uid: string,\r\n-        timestamp: Date,\r\n-        participants: number\r\n+        public host_uid: string,\r\n+        public timestamp: Date,\r\n+        public participants: number\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656739198087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,13 @@\n         public host_uid: string,\r\n         public timestamp: Date,\r\n         public participants: number\r\n     ){}\r\n+}\r\n+\r\n+export class User {\r\n+    constructor(\r\n+        public uid: string,\r\n+        public username: string,\r\n+        public accountCreated?: Date,\r\n+    ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656740672515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,6 @@\n export class User {\r\n     constructor(\r\n         public uid: string,\r\n         public username: string,\r\n-        public accountCreated?: Date,\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810668232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,5 +10,14 @@\n     constructor(\r\n         public uid: string,\r\n         public username: string,\r\n     ){}\r\n+}\r\n+\r\n+export class Participants {\r\n+    constructor(\r\n+        public sid: string,\r\n+        public username: string,\r\n+        public userNumber: number,\r\n+        public sessionStartTimestamp: string,\r\n+    ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656811024060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n         public username: string,\r\n     ){}\r\n }\r\n \r\n-export class Participants {\r\n+export class Participant {\r\n     constructor(\r\n         public sid: string,\r\n         public username: string,\r\n         public userNumber: number,\r\n"
+                },
+                {
+                    "date": 1656811100550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,8 @@\n \r\n export class Participant {\r\n     constructor(\r\n         public sid: string,\r\n-        public username: string,\r\n         public userNumber: number,\r\n         public sessionStartTimestamp: string,\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656811109023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,7 @@\n export class Participant {\r\n     constructor(\r\n         public sid: string,\r\n         public userNumber: number,\r\n-        public sessionStartTimestamp: string,\r\n+        public sessionStartTimestamp: Date,\r\n     ){}\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656811203680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n }\r\n \r\n export class Participant {\r\n     constructor(\r\n+        public uid: string,\r\n         public sid: string,\r\n         public userNumber: number,\r\n         public sessionStartTimestamp: Date,\r\n     ){}\r\n"
                 }
             ],
             "date": 1656717028726,

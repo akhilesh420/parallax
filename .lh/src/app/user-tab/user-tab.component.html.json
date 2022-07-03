@@ -1,0 +1,90 @@
+{
+    "sourceFile": "src/app/user-tab/user-tab.component.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1656808892627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656809008284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n         <div class=\"dp\">\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n-    <div class=\"col grow-user\">\n+    <div class=\"col grow-user\" align=\"left\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n         <div class=\"dp\">\n"
+                },
+                {
+                    "date": 1656809023953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n         <div class=\"dp\">\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n-    <div class=\"col grow-user\" align=\"left\">\n+    <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n         <div class=\"dp\">\n"
+                },
+                {
+                    "date": 1656809419014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n         <div class=\"dp\">\n-            <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n+            <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809452153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n-        <div class=\"dp\">\n+        <div class=\"status\">\n             <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809522333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n-        <div class=\"status\">\n+        <div class=\"status accept\">\n             <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809532127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n-        <div class=\"status accept\">\n-            <img src=\"assets/icons/accept.svg\" alt=\"\">\n+        <div class=\"status\">\n+            <img class=\"accept\" src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809538240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n         <div class=\"status\">\n-            <img class=\"accept\" src=\"assets/icons/accept.svg\" alt=\"\">\n+            <img  src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809570129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n-        <div class=\"status\">\n-            <img  src=\"assets/icons/accept.svg\" alt=\"\">\n+        <div class=\"status accept\">\n+            <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809633911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col grow-status\">\n-        <div class=\"status accept\">\n+        <div class=\"button\">\n             <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809712533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n <div class=\"row user-tab\">\n-    <div class=\"col grow-dp\">\n+    <div class=\"col\">\n         <div class=\"dp\">\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n-    <div class=\"col grow-status\">\n+    <div class=\"col\">\n         <div class=\"button\">\n             <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1656809864549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <div class=\"col grow-user\">\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col\">\n-        <div class=\"button\">\n+        <div class=\"status\">\n             <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809902501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,7 @@\n         <h4>Akhilesh</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n-            <img src=\"assets/icons/accept.svg\" alt=\"\">\n         </div>\n     </div>\n </div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809959503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh</h4>\n+        <h4>Akhilesh Sharma</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656809969252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma</h4>\n+        <h4>Akhilesh Sharma Rajesh</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656810128060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma Rajesh</h4>\n+        <h4>Akhilesh Sharma</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656810178666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma</h4>\n+        <h4>Akhilesh Sharma Rajesh</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656810202138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh Sharma Rajesh</h4>\n+        <h4>Akhilesh </h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                },
+                {
+                    "date": 1656810230448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n             <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n         </div>\n     </div>\n     <div class=\"col grow-user\">\n-        <h4>Akhilesh </h4>\n+        <h4>Akhilesh Sharma Rajesh</h4>\n     </div>\n     <div class=\"col\">\n         <div class=\"status\">\n         </div>\n"
+                }
+            ],
+            "date": 1656808892627,
+            "name": "Commit-0",
+            "content": "<div class=\"row user-tab\">\n    <div class=\"col grow-dp\">\n        <div class=\"dp\">\n            <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"col grow-user\">\n        <h4>Akhilesh</h4>\n    </div>\n    <div class=\"col grow-status\">\n        <div class=\"dp\">\n            <img src=\"assets/icons/display_picture.svg\" alt=\"\">\n        </div>\n    </div>\n</div>"
+        }
+    ]
+}

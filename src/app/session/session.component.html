@@ -1,1 +1,24 @@
-<p>session works!</p>
+<div class="row center">
+    <div class="col center">
+        <div class="row gap">
+            <div class="col">
+                <div class="dp">
+                    <img src="assets/icons/display_picture.svg" alt="">
+                </div>
+            </div>
+            <div class="col center">
+                <input type="text" [(ngModel)]="username" (keydown)="onEnter($event)" (focusout)="updateUsername()">
+            </div>
+        </div>
+        <div class="row space">
+            <div class="col users-list">
+                <app-users-list [participants]="participants"></app-users-list>
+            </div>
+        </div>
+        <div class="row center gap-small create-button space">
+            <div class="col center">
+                <h3>Ready</h3>
+            </div>
+        </div>
+    </div>
+</div>

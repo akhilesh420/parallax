@@ -1,0 +1,138 @@
+{
+    "sourceFile": "src/app/users-list/users-list.component.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 30,
+            "patches": [
+                {
+                    "date": 1656807646244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656807655967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n .container {\r\n     border: 2px solid var(--secondary);\r\n+    width: 100%;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807678445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n .container {\r\n     border: 2px solid var(--secondary);\r\n+}\r\n+\r\n+.main {\r\n     width: 100%;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807729375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .container {\r\n-    border: 2px solid var(--secondary);\r\n }\r\n \r\n .main {\r\n     width: 100%;\r\n+    border: 2px solid var(--secondary);\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807753482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,3 @@\n-.container {\r\n-}\r\n-\r\n .main {\r\n-    width: 100%;\r\n     border: 2px solid var(--secondary);\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807870932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n+    height: 100%;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656807898488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 100%;\r\n+}\r\n+\r\n+.container {\r\n+    height: 100%;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808005075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n-    height: 100%;\r\n+    height: 200px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808018967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n+    border-radius: 8px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808047731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n+    border-top: 10px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808058255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n-    border-top: 10px;\r\n+    border-top: 10px  solid var(--secondary); \r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808066344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n-    border-top: 10px  solid var(--secondary); \r\n+    border-top: 20px solid var(--secondary); \r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808109197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .main {\r\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n-    border-top: 20px solid var(--secondary); \r\n+    border-top: 24px solid var(--secondary); \r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808141317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n+    background-color: var(--primary);\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808263562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,22 @@\n }\r\n \r\n .container {\r\n     height: 100%;\r\n+}\r\n+\r\n+.dp {\r\n+    height: 40px;\r\n+    width: 40px;\r\n+    border: 2px solid var(--secondary);\r\n+    border-radius: 50%;\r\n+    position: relative;\r\n+    overflow: hidden;\r\n+}\r\n+\r\n+.dp>img {\r\n+    width: 100%;\r\n+    height: 100%;\r\n+    -o-object-fit: cover;\r\n+    object-fit: cover;\r\n+    overflow: hidden;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808270497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n     height: 100%;\r\n }\r\n \r\n .dp {\r\n-    height: 40px;\r\n-    width: 40px;\r\n+    height: 20px;\r\n+    width: 20px;\r\n     border: 2px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n"
+                },
+                {
+                    "date": 1656808287440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n     height: 200px;\r\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n     background-color: var(--primary);\r\n+    padding: 10px 0px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808302257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n     height: 200px;\r\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n     background-color: var(--primary);\r\n-    padding: 10px 0px;\r\n+    padding: 10px 5px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656808328632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \r\n .dp {\r\n     height: 20px;\r\n     width: 20px;\r\n-    border: 2px solid var(--secondary);\r\n+    border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n"
+                },
+                {
+                    "date": 1656808392082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,15 @@\n }\r\n \r\n .container {\r\n     height: 100%;\r\n+    width: 100%;\r\n }\r\n \r\n+.gap {\r\n+\r\n+}\r\n+\r\n .dp {\r\n     height: 20px;\r\n     width: 20px;\r\n     border: 1px solid var(--secondary);\r\n"
+                },
+                {
+                    "date": 1656808579753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,12 +11,8 @@\n     height: 100%;\r\n     width: 100%;\r\n }\r\n \r\n-.gap {\r\n-\r\n-}\r\n-\r\n .dp {\r\n     height: 20px;\r\n     width: 20px;\r\n     border: 1px solid var(--secondary);\r\n@@ -30,5 +26,9 @@\n     height: 100%;\r\n     -o-object-fit: cover;\r\n     object-fit: cover;\r\n     overflow: hidden;\r\n+}\r\n+\r\n+.user-tab {\r\n+    align-items: baseline;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808615235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,6 +29,6 @@\n     overflow: hidden;\r\n }\r\n \r\n .user-tab {\r\n-    align-items: baseline;\r\n+    column-gap: 8px;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808662511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,5 +30,6 @@\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n+    justify-content: center;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808759660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n     width: 100%;\r\n }\r\n \r\n .dp {\r\n-    height: 20px;\r\n-    width: 20px;\r\n+    height: 100%;\r\n+    width: 100%;\r\n     border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n@@ -30,6 +30,14 @@\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n-    justify-content: center;\r\n+    align-items: center;\r\n+}\r\n+\r\n+.grow-dp {\r\n+    flex-grow: 1; \r\n+}\r\n+\r\n+.grow-user {\r\n+    flex-grow: 8; \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808791551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n     width: 100%;\r\n }\r\n \r\n .dp {\r\n-    height: 100%;\r\n-    width: 100%;\r\n+    height: 20xp;\r\n+    width: 20px;\r\n     border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n"
+                },
+                {
+                    "date": 1656808811393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     width: 100%;\r\n }\r\n \r\n .dp {\r\n-    height: 20xp;\r\n+    height: 20px;\r\n     width: 20px;\r\n     border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n@@ -38,6 +38,6 @@\n     flex-grow: 1; \r\n }\r\n \r\n .grow-user {\r\n-    flex-grow: 8; \r\n+    flex-grow: 4; \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808892650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,34 +10,4 @@\n .container {\r\n     height: 100%;\r\n     width: 100%;\r\n }\r\n-\r\n-.dp {\r\n-    height: 20px;\r\n-    width: 20px;\r\n-    border: 1px solid var(--secondary);\r\n-    border-radius: 50%;\r\n-    position: relative;\r\n-    overflow: hidden;\r\n-}\r\n-\r\n-.dp>img {\r\n-    width: 100%;\r\n-    height: 100%;\r\n-    -o-object-fit: cover;\r\n-    object-fit: cover;\r\n-    overflow: hidden;\r\n-}\r\n-\r\n-.user-tab {\r\n-    column-gap: 8px;\r\n-    align-items: center;\r\n-}\r\n-\r\n-.grow-dp {\r\n-    flex-grow: 1; \r\n-}\r\n-\r\n-.grow-user {\r\n-    flex-grow: 4; \r\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809138241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n     height: 200px;\r\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n     background-color: var(--primary);\r\n-    padding: 10px 5px;\r\n+    padding: 10px 8px;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656809229751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n     background-color: var(--primary);\r\n     padding: 10px 8px;\r\n+    overflow-y: auto;\r\n }\r\n \r\n .container {\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656809312857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,5 +10,6 @@\n \r\n .container {\r\n     height: 100%;\r\n     width: 100%;\r\n+    row-gap: 10px;\r\n }\r\n"
+                },
+                {
+                    "date": 1656809337848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n     border: 2px solid var(--secondary);\r\n     height: 200px;\r\n     border-radius: 8px;\r\n     border-top: 24px solid var(--secondary); \r\n-    background-color: var(--primary);\r\n     padding: 10px 8px;\r\n     overflow-y: auto;\r\n }\r\n \r\n"
+                }
+            ],
+            "date": 1656807646244,
+            "name": "Commit-0",
+            "content": ".container {\r\n    border: 2px solid var(--secondary);\r\n}"
+        }
+    ]
+}

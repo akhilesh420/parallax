@@ -1,0 +1,138 @@
+{
+    "sourceFile": "src/app/user-tab/user-tab.component.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 30,
+            "patches": [
+                {
+                    "date": 1656808892627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656808967527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-\r\n .dp {\r\n     height: 20px;\r\n     width: 20px;\r\n     border: 1px solid var(--secondary);\r\n@@ -18,8 +17,9 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n+    text-align: left;\r\n }\r\n \r\n .grow-dp {\r\n     flex-grow: 1; \r\n"
+                },
+                {
+                    "date": 1656808984655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,14 +17,14 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n-    text-align: left;\r\n }\r\n \r\n .grow-dp {\r\n     flex-grow: 1; \r\n }\r\n \r\n .grow-user {\r\n-    flex-grow: 4; \r\n+    flex-grow: 4;\r\n+    text-align: left;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809041734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,5 +26,6 @@\n \r\n .grow-user {\r\n     flex-grow: 4;\r\n     text-align: left;\r\n+    justify-content: flex-start;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809081939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,12 +19,10 @@\n     column-gap: 8px;\r\n     align-items: center;\r\n }\r\n \r\n-.grow-dp {\r\n-    flex-grow: 1; \r\n-}\r\n \r\n+\r\n .grow-user {\r\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n"
+                },
+                {
+                    "date": 1656809109402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,13 @@\n     column-gap: 8px;\r\n     align-items: center;\r\n }\r\n \r\n-\r\n-\r\n .grow-user {\r\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n+}\r\n+\r\n+h4 {\r\n+    text-align: left;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656809203936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n+    overflow-y: auto;\r\n }\r\n \r\n .grow-user {\r\n     flex-grow: 4;\r\n"
+                },
+                {
+                    "date": 1656809229749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n-    overflow-y: auto;\r\n }\r\n \r\n .grow-user {\r\n     flex-grow: 4;\r\n"
+                },
+                {
+                    "date": 1656809271459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .dp {\r\n-    height: 20px;\r\n-    width: 20px;\r\n+    height: 30px;\r\n+    width: 30px;\r\n     border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n"
+                },
+                {
+                    "date": 1656809337849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n+    background-color: var(--primary);\r\n }\r\n \r\n .grow-user {\r\n     flex-grow: 4;\r\n"
+                },
+                {
+                    "date": 1656809356397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n-    background-color: var(--primary);\r\n+    /* background-color: var(--primary); */\r\n }\r\n \r\n .grow-user {\r\n     flex-grow: 4;\r\n"
+                },
+                {
+                    "date": 1656809452155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,17 @@\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n-.dp>img {\r\n+.status {\r\n+    height: 30px;\r\n+    width: 30px;\r\n+    position: relative;\r\n+    overflow: hidden;\r\n+}\r\n+\r\n+\r\n+img {\r\n     width: 100%;\r\n     height: 100%;\r\n     -o-object-fit: cover;\r\n     object-fit: cover;\r\n"
+                },
+                {
+                    "date": 1656809460581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n }\r\n \r\n .status {\r\n     height: 30px;\r\n-    width: 30px;\r\n+    width: auto;\r\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1656809633913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,22 +6,40 @@\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n+\r\n+.dp>img {\r\n+    width: 100%;\r\n+    height: 100%;\r\n+    -o-object-fit: cover;\r\n+    object-fit: cover;\r\n+    overflow: hidden;\r\n+}\r\n+\r\n .status {\r\n     height: 30px;\r\n     width: auto;\r\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n+.button {\r\n+    display: none;\r\n+    width: 48px;\r\n+    height: 48px;\r\n+    border: 2px solid black;\r\n+    border-radius: 50%;\r\n+    cursor: pointer;\r\n+    margin-top: 8px;\r\n+}\r\n \r\n-img {\r\n-    width: 100%;\r\n-    height: 100%;\r\n-    -o-object-fit: cover;\r\n-    object-fit: cover;\r\n-    overflow: hidden;\r\n+.button>img {\r\n+    -webkit-filter: invert(100%);\r\n+    /* Safari/Chrome */\r\n+    filter: invert(100%);\r\n+    width: 27px;\r\n+    transform: translate(10.5px, 10.5px);\r\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n"
+                },
+                {
+                    "date": 1656809657849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n     overflow: hidden;\r\n }\r\n \r\n .button {\r\n-    display: none;\r\n     width: 48px;\r\n     height: 48px;\r\n     border: 2px solid black;\r\n     border-radius: 50%;\r\n"
+                },
+                {
+                    "date": 1656809802233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,23 +22,23 @@\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n-.button {\r\n+.status {\r\n     width: 48px;\r\n-    height: 48px;\r\n+    width: auto;\r\n     border: 2px solid black;\r\n     border-radius: 50%;\r\n     cursor: pointer;\r\n     margin-top: 8px;\r\n }\r\n \r\n-.button>img {\r\n+.status>img {\r\n     -webkit-filter: invert(100%);\r\n     /* Safari/Chrome */\r\n     filter: invert(100%);\r\n-    width: 27px;\r\n-    transform: translate(10.5px, 10.5px);\r\n+    width: auto;\r\n+    /* transform: translate(10.5px, 10.5px); */\r\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n"
+                },
+                {
+                    "date": 1656809808321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     overflow: hidden;\r\n }\r\n \r\n .status {\r\n-    width: 48px;\r\n+    height: 30px;\r\n     width: auto;\r\n     border: 2px solid black;\r\n     border-radius: 50%;\r\n     cursor: pointer;\r\n"
+                },
+                {
+                    "date": 1656809815761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,12 +25,8 @@\n \r\n .status {\r\n     height: 30px;\r\n     width: auto;\r\n-    border: 2px solid black;\r\n-    border-radius: 50%;\r\n-    cursor: pointer;\r\n-    margin-top: 8px;\r\n }\r\n \r\n .status>img {\r\n     -webkit-filter: invert(100%);\r\n"
+                },
+                {
+                    "date": 1656809825792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,19 +22,20 @@\n     position: relative;\r\n     overflow: hidden;\r\n }\r\n \r\n-.status {\r\n-    height: 30px;\r\n-    width: auto;\r\n-}\r\n-\r\n .status>img {\r\n     -webkit-filter: invert(100%);\r\n     /* Safari/Chrome */\r\n     filter: invert(100%);\r\n     width: auto;\r\n     /* transform: translate(10.5px, 10.5px); */\r\n+\r\n+    width: 100%;\r\n+    height: 100%;\r\n+    -o-object-fit: cover;\r\n+    object-fit: cover;\r\n+    overflow: hidden;\r\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n"
+                },
+                {
+                    "date": 1656809832851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,12 +23,12 @@\n     overflow: hidden;\r\n }\r\n \r\n .status>img {\r\n-    -webkit-filter: invert(100%);\r\n+    /* -webkit-filter: invert(100%);\r\n     /* Safari/Chrome */\r\n     filter: invert(100%);\r\n-    width: auto;\r\n+    width: auto; */\r\n     /* transform: translate(10.5px, 10.5px); */\r\n \r\n     width: 100%;\r\n     height: 100%;\r\n"
+                },
+                {
+                    "date": 1656809859865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,11 @@\n     overflow: hidden;\r\n }\r\n \r\n .status>img {\r\n-    /* -webkit-filter: invert(100%);\r\n+    /* -webkit-filter: invert(100%); */\r\n     /* Safari/Chrome */\r\n-    filter: invert(100%);\r\n+    /* filter: invert(100%);\r\n     width: auto; */\r\n     /* transform: translate(10.5px, 10.5px); */\r\n \r\n     width: 100%;\r\n"
+                },
+                {
+                    "date": 1656809902503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,28 +16,13 @@\n     overflow: hidden;\r\n }\r\n \r\n .status {\r\n-    height: 30px;\r\n-    width: auto;\r\n-    position: relative;\r\n-    overflow: hidden;\r\n+    height: 15px;\r\n+    width: 15px;\r\n+    background-color: var(--accept);\r\n }\r\n \r\n-.status>img {\r\n-    /* -webkit-filter: invert(100%); */\r\n-    /* Safari/Chrome */\r\n-    /* filter: invert(100%);\r\n-    width: auto; */\r\n-    /* transform: translate(10.5px, 10.5px); */\r\n-\r\n-    width: 100%;\r\n-    height: 100%;\r\n-    -o-object-fit: cover;\r\n-    object-fit: cover;\r\n-    overflow: hidden;\r\n-}\r\n-\r\n .user-tab {\r\n     column-gap: 8px;\r\n     align-items: center;\r\n     /* background-color: var(--primary); */\r\n"
+                },
+                {
+                    "date": 1656809918128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n .status {\r\n     height: 15px;\r\n     width: 15px;\r\n     background-color: var(--accept);\r\n+    border-radius:50%;\r\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n"
+                },
+                {
+                    "date": 1656809933466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .dp {\r\n-    height: 30px;\r\n-    width: 30px;\r\n+    height: 25px;\r\n+    width: 25px;\r\n     border: 1px solid var(--secondary);\r\n     border-radius: 50%;\r\n     position: relative;\r\n     overflow: hidden;\r\n"
+                },
+                {
+                    "date": 1656809952617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n .grow-user {\r\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n+    overflow-x: hidden;\r\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n"
+                },
+                {
+                    "date": 1656810252873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,5 +37,6 @@\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n+    word-wrap: none;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810284172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,9 @@\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n-    word-wrap: none;\r\n+    white-space: -moz-pre-wrap; /* Firefox */\r\n+white-space: -o-pre-wrap; /* Opera */\r\n+white-space: pre-wrap; /* Chrome */\r\n+word-wrap: break-word; /* IE */\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810313320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n .status {\r\n     height: 15px;\r\n     width: 15px;\r\n     background-color: var(--accept);\r\n-    border-radius:50%;\r\n+    border-radius: 50%;\r\n }\r\n \r\n .user-tab {\r\n     column-gap: 8px;\r\n@@ -37,9 +37,12 @@\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n-    white-space: -moz-pre-wrap; /* Firefox */\r\n-white-space: -o-pre-wrap; /* Opera */\r\n-white-space: pre-wrap; /* Chrome */\r\n-word-wrap: break-word; /* IE */\r\n+    word-break: unset;\r\n+    word-wrap: unset;\r\n+    overflow-wrap: unset;\r\n+    -webkit-hyphens: unset;\r\n+    -moz-hyphens: unset;\r\n+    -ms-hyphens: unset;\r\n+    hyphens: unset;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810373331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,16 +33,10 @@\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n     overflow-x: hidden;\r\n+    max-width: 27px;\r\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n-    word-break: unset;\r\n-    word-wrap: unset;\r\n-    overflow-wrap: unset;\r\n-    -webkit-hyphens: unset;\r\n-    -moz-hyphens: unset;\r\n-    -ms-hyphens: unset;\r\n-    hyphens: unset;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656810381629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n     overflow-x: hidden;\r\n-    max-width: 27px;\r\n+    max-height: 27px;\r\n }\r\n \r\n h4 {\r\n     text-align: left;\r\n"
+                },
+                {
+                    "date": 1656810395145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n .grow-user {\r\n     flex-grow: 4;\r\n     text-align: left;\r\n     justify-content: flex-start;\r\n-    overflow-x: hidden;\r\n+    overflow: hidden;\r\n     max-height: 27px;\r\n }\r\n \r\n h4 {\r\n"
+                }
+            ],
+            "date": 1656808892627,
+            "name": "Commit-0",
+            "content": "\r\n.dp {\r\n    height: 20px;\r\n    width: 20px;\r\n    border: 1px solid var(--secondary);\r\n    border-radius: 50%;\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.dp>img {\r\n    width: 100%;\r\n    height: 100%;\r\n    -o-object-fit: cover;\r\n    object-fit: cover;\r\n    overflow: hidden;\r\n}\r\n\r\n.user-tab {\r\n    column-gap: 8px;\r\n    align-items: center;\r\n}\r\n\r\n.grow-dp {\r\n    flex-grow: 1; \r\n}\r\n\r\n.grow-user {\r\n    flex-grow: 4; \r\n}"
+        }
+    ]
+}

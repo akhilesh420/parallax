@@ -1,5 +1,7 @@
+import { SharedService } from './services/shared.service';
 import { FirebaseService } from './services/firebase.service';
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'parallax';
-  version = '1.0.0'
+  version = '1.0.0';
 
-  constructor(private firebaseService: FirebaseService) {}
+  progress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit() {
     // Sign in to firebase
-    this.firebaseService.signIn(); 
+    this.firebaseService.signIn();
+
+    // Toggle progress bar
+    this.progress = this.sharedService.getProgress();
   }
 }

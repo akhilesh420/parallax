@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1656717083832,
@@ -52,6 +52,26 @@
                 {
                     "date": 1656719659159,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import { Session } from './../models/firestore.model';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n"
+                },
+                {
+                    "date": 1656719746919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n @Component({\n@@ -8,22 +7,16 @@\n   styleUrls: ['./home.component.css']\n })\n export class HomeComponent implements OnInit {\n \n-  constructor(\n-    private firebaseService: FirebaseService,\n-    private router: Router\n-  ) { }\n+  constructor(private router: Router) { }\n \n   ngOnInit(): void {\n   }\n \n   createSession() {\n-    const user_uid = this.firebaseService.getUserUid();\n-    if (user_uid) {\n-      this.firebaseService.createSession()\n-        .then(sid => this.router.navigate([`session/${sid}`]))\n-        .catch(error => console.log(error));\n-    }\n+    this.firebaseService.createSession()\n+      .then(sid => this.router.navigate([`session/${sid}`]))\n+      .catch(error => console.log(error));\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656719753735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n @Component({\n@@ -7,16 +8,19 @@\n   styleUrls: ['./home.component.css']\n })\n export class HomeComponent implements OnInit {\n \n-  constructor(private router: Router) { }\n+  constructor(\n+    private firebaseService: FirebaseService,\n+    private router: Router\n+  ) { }\n \n   ngOnInit(): void {\n   }\n \n   createSession() {\n     this.firebaseService.createSession()\n-      .then(sid => this.router.navigate([`session/${sid}`]))\n-      .catch(error => console.log(error));\n+        .then(sid => this.router.navigate([`session/${sid}`]))\n+        .catch(error => console.log(error));\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656721502705,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { SharedService } from './../services/shared.service';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n@@ -10,15 +11,17 @@\n export class HomeComponent implements OnInit {\n \n   constructor(\n     private firebaseService: FirebaseService,\n+    private sharedService: SharedService,\n     private router: Router\n   ) { }\n \n   ngOnInit(): void {\n   }\n \n-  createSession() {\n+  async createSession() {\n+    this.sharedService.startProgress();\n     this.firebaseService.createSession()\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n   }\n"
+                },
+                {
+                    "date": 1656721528807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,11 @@\n   }\n \n   async createSession() {\n     this.sharedService.startProgress();\n-    this.firebaseService.createSession()\n+    await this.firebaseService.createSession()\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n+    this.sharedService.endProgress();\n   }\n \n }\n"
+                },
+                {
+                    "date": 1656721567730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import { SharedService } from './../services/shared.service';\n import { FirebaseService } from './../services/firebase.service';\n import { Component, OnInit } from '@angular/core';\n import { Router } from '@angular/router';\n \n@@ -11,20 +10,17 @@\n export class HomeComponent implements OnInit {\n \n   constructor(\n     private firebaseService: FirebaseService,\n-    private sharedService: SharedService,\n     private router: Router\n   ) { }\n \n   ngOnInit(): void {\n   }\n \n-  async createSession() {\n-    this.sharedService.startProgress();\n-    await this.firebaseService.createSession()\n+  createSession() {\n+    this.firebaseService.createSession()\n         .then(sid => this.router.navigate([`session/${sid}`]))\n         .catch(error => console.log(error));\n-    this.sharedService.endProgress();\n   }\n \n }\n"
                 }
             ],
             "date": 1656717083832,

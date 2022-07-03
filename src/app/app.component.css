@@ -1,0 +1,22 @@
+/* Progress bar*/
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background-color: var(--secondary);
+    -webkit-animation: bubble 5.0s forwards;
+    /* for less modern browsers */
+    animation: bubble 5.0s forwards;
+    animation-name: progress;
+}
+
+@keyframes progress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}

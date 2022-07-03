@@ -3,11 +3,103 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1656712606081,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1656720335577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,8 +52,12 @@\n   font-size: 60px;\n   text-align: center;\n }\n \n+.pointer {\n+  cursor: pointer;\n+}\n+\n input {\n   display: none;\n }\n \n"
+                },
+                {
+                    "date": 1656721078365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,25 @@\n /* You can add global styles to this file, and also import other style files */\n @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Updock&display=swap');\n+\n+:root {\n+  --primary: #D08873;\n+  --secondary: #4D415E;\n+  --reject: #E7676C;\n+  --accept: #83C0AF;\n+  --background: #EEDBCD;\n+}\n+\n+\n html {\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   scroll-behavior: smooth;\n   image-rendering: optimizeQuality;\n }\n \n body {\n-  background-color: #EEDBCD;\n+  background-color: var(--background);\n   height: 100%;\n   width: 100%;\n   padding: 0;\n   margin: 0;\n@@ -65,9 +75,9 @@\n   width: 64px;\n   height: 64px;\n   border: 2px solid black;\n   border-radius: 50%;\n-  background-color: #D08873;\n+  background-color: var(--primary);\n   cursor: pointer;\n }\n \n .camera > img {\n@@ -92,13 +102,13 @@\n   transform: translate(10.5px, 10.5px);\n }\n \n .accept {\n-  background-color: #83C0AF;\n+  background-color: var(--accept);\n }\n \n .reject {\n-  background-color: #E7676C;\n+  background-color: var(--primary);\n }\n \n .gap {\n   column-gap: 12px;\n@@ -138,9 +148,9 @@\n \n .create-session {\n   border: 2px solid black;\n   border-radius: 12px;\n-  background-color: #83C0AF;\n+  background-color: var(--accept);\n   cursor: pointer;\n   padding: 5px;\n }\n \n@@ -149,9 +159,9 @@\n   position: fixed;\n   top: 0;\n   left: 0;\n   height: 6px;\n-  background-color: #4D415E;\n+  background-color: var(--secondary);\n   -webkit-animation: bubble 5.0s forwards; /* for less modern browsers */\n         animation: bubble 5.0s forwards;\n   animation-name: progress;\n }\n"
+                },
+                {
+                    "date": 1656721818411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,9 @@\n   text-align: center;\n   margin: 0;\n }\n \n-.create-session {\n+.create-button {\n   border: 2px solid black;\n   border-radius: 12px;\n   background-color: var(--accept);\n   cursor: pointer;\n"
+                },
+                {
+                    "date": 1656721863174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,27 +151,5 @@\n   border-radius: 12px;\n   background-color: var(--accept);\n   cursor: pointer;\n   padding: 5px;\n-}\n-\n-/* Progress bar*/\n-.progress {\n-  position: fixed;\n-  top: 0;\n-  left: 0;\n-  height: 6px;\n-  background-color: var(--secondary);\n-  -webkit-animation: bubble 5.0s forwards; /* for less modern browsers */\n-        animation: bubble 5.0s forwards;\n-  animation-name: progress;\n-}\n-\n-@keyframes progress {\n-  from {\n-    width: 0%;\n-  }\n-\n-  to {\n-    width: 100%;\n-  }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723020575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n .pointer {\n   cursor: pointer;\n }\n \n-input {\n+.img-input {\n   display: none;\n }\n \n .camera {\n"
+                },
+                {
+                    "date": 1656723421460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,5 +151,15 @@\n   border-radius: 12px;\n   background-color: var(--accept);\n   cursor: pointer;\n   padding: 5px;\n+}\n+\n+input {\n+  border: 2px solid black;\n+  font-family: 'Poppins', sans-serif;\n+  font-weight: 400;\n+  color: white;\n+  text-align: center;\n+  margin: 0;\n+  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723429542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,9 +157,7 @@\n input {\n   border: 2px solid black;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n-  color: white;\n   text-align: center;\n   margin: 0;\n-  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723436547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,7 +157,6 @@\n input {\n   border: 2px solid black;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n-  text-align: center;\n   margin: 0;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723453225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,5 +158,7 @@\n   border: 2px solid black;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n   margin: 0;\n+  padding-left: 5px;\n+  padding-right: 5px;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723469269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -155,8 +155,9 @@\n }\n \n input {\n   border: 2px solid black;\n+  border-radius: 2px;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n   margin: 0;\n   padding-left: 5px;\n"
+                },
+                {
+                    "date": 1656723519518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -161,5 +161,10 @@\n   font-weight: 400;\n   margin: 0;\n   padding-left: 5px;\n   padding-right: 5px;\n+}\n+\n+input:active {\n+  outline: none;\n+  border-color: 2px solid var(--primary);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723566497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -163,8 +163,8 @@\n   padding-left: 5px;\n   padding-right: 5px;\n }\n \n-input:active {\n+input:focus {\n   outline: none;\n   border-color: 2px solid var(--primary);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723589569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -155,9 +155,9 @@\n }\n \n input {\n   border: 2px solid black;\n-  border-radius: 2px;\n+  border-radius: 10px;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n   margin: 0;\n   padding-left: 5px;\n"
+                },
+                {
+                    "date": 1656723595293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -155,9 +155,9 @@\n }\n \n input {\n   border: 2px solid black;\n-  border-radius: 10px;\n+  border-radius: 8px;\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n   margin: 0;\n   padding-left: 5px;\n"
+                },
+                {
+                    "date": 1656723607311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,6 +165,6 @@\n }\n \n input:focus {\n   outline: none;\n-  border-color: 2px solid var(--primary);\n+  border: 2px solid var(--primary);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656723615318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,6 +165,6 @@\n }\n \n input:focus {\n   outline: none;\n-  border: 2px solid var(--primary);\n+  border: 2px solid var(--secondary);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1656808452509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,8 +145,18 @@\n   text-align: center;\n   margin: 0;\n }\n \n+h4 {\n+  font-family: 'Poppins', sans-serif;\n+  font-weight: 400;\n+  color: white;\n+  text-align: center;\n+  margin: 0;\n+  font-size: 14px;\n+}\n+\n+\n .create-button {\n   border: 2px solid black;\n   border-radius: 12px;\n   background-color: var(--accept);\n"
+                },
+                {
+                    "date": 1656808459367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n   font-weight: 400;\n   color: white;\n   text-align: center;\n   margin: 0;\n-  font-size: 14px;\n+  font-size: 12px;\n }\n \n \n .create-button {\n"
+                },
+                {
+                    "date": 1656808632096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n   font-weight: 400;\n   color: white;\n   text-align: center;\n   margin: 0;\n-  font-size: 12px;\n+  font-size: 18px;\n }\n \n \n .create-button {\n"
+                },
+                {
+                    "date": 1656808647267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n   font-weight: 400;\n   color: white;\n   text-align: center;\n   margin: 0;\n-  font-size: 18px;\n+  font-size: 16px;\n }\n \n \n .create-button {\n"
+                },
+                {
+                    "date": 1656809277528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n   font-weight: 400;\n   color: white;\n   text-align: center;\n   margin: 0;\n-  font-size: 16px;\n+  font-size: 20px;\n }\n \n \n .create-button {\n"
+                },
+                {
+                    "date": 1656809372330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -148,9 +148,9 @@\n \n h4 {\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n-  color: white;\n+  color: black;\n   text-align: center;\n   margin: 0;\n   font-size: 20px;\n }\n"
+                },
+                {
+                    "date": 1656809385250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -148,9 +148,9 @@\n \n h4 {\n   font-family: 'Poppins', sans-serif;\n   font-weight: 400;\n-  color: black;\n+  color: var(--secondary);\n   text-align: center;\n   margin: 0;\n   font-size: 20px;\n }\n"
                 }
             ],
             "date": 1656712606081,
